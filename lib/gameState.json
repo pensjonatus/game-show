@@ -1,0 +1,21 @@
+{
+  "gameId": "",
+  "currentQuestionId": "",
+  "contestants": [
+    {
+      "id": "jim",
+      "name": "Jim Querco",
+      "score": 0
+    },
+    {
+      "id": "oola",
+      "name": "Oola Sixraven",
+      "score": 0
+    },
+    {
+      "id": "segi",
+      "name": "Segi Fernandez",
+      "score": 0
+    }
+  ]
+}

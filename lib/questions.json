@@ -1,0 +1,50 @@
+{
+  "questions": [
+    {
+      "id": "oxford",
+      "question": "Oxford comma?",
+      "answers": ["Ghosts, goblins, and ghouls", "Ghosts, goblins and ghouls"]
+    },
+    {
+      "id": "contractions",
+      "question": "Is it ok to use contractions?",
+      "answers": ["Yes, why not", "Don't!"]
+    },
+    {
+      "id": "setup",
+      "question": "Which would you choose for your tech writing setup?",
+      "answers": ["DITA", "Markdown", "MadCap Flare", "Adobe FrameMaker"]
+    },
+    {
+      "id": "credentials",
+      "question": "What tech writing credentials do you have?",
+      "answers": [
+        "A degree in tech writing",
+        "A certificate",
+        "Self-made and forged in the fray of writing"
+      ]
+    },
+    {
+      "id": "code-samples",
+      "question": "Do you prepare code samples?",
+      "answers": [
+        "Clickety, clackety, I do!",
+        "I get them from other, find the best place for them in the docs"
+      ]
+    },
+    {
+      "id": "review",
+      "question": "Does your team have a tech writing review process?",
+      "answers": [
+        "Nope, just SMEs",
+        "Peer review, me and the gang",
+        "We have designated editors!"
+      ]
+    },
+    {
+      "id": "field",
+      "question": "What field do you work in?",
+      "answers": ["💻 Software", "🛠 Manufacturing"]
+    }
+  ]
+}
