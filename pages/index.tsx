@@ -7,7 +7,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const feed = [
     {
       id: '1',
-      title: 'Prisma is the perfect ORM for Next.js',
+      title: 'Prisma is the perfect ORM for S.U.P.E.R. G.A.M.E.',
       content:
         '[Prisma](https://github.com/prisma/prisma) and Next.js go _great_ together!',
       published: false,

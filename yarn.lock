@@ -89,6 +89,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prisma/engines@npm:3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b":
+  version: 3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b
+  resolution: "@prisma/engines@npm:3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b"
+  checksum: 045e08c6c72891a6e0028357d261ca5995ca5bdc2c6466b294141e37605ec1f1eb72f4d49301adc76680bedcf82d9671221befe40d4746f3e679a4406767adb5
+  languageName: node
+  linkType: hard
+
 "@types/debug@npm:^4.0.0":
   version: 4.1.7
   resolution: "@types/debug@npm:4.1.7"
@@ -261,6 +268,7 @@ __metadata:
     "@types/react": 17.0.38
     next: 12.0.10
     prettier: ^2.6.2
+    prisma: ^3.13.0
     react: 17.0.2
     react-dom: 17.0.2
     react-markdown: 8.0.0
@@ -733,6 +741,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prisma@npm:^3.13.0":
+  version: 3.13.0
+  resolution: "prisma@npm:3.13.0"
+  dependencies:
+    "@prisma/engines": 3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b
+    ts-pattern: ^4.0.1
+  bin:
+    prisma: build/index.js
+    prisma2: build/index.js
+  checksum: cbd59f53eea125cdb14722d16bf21e38a5eb82ed4e5f42f3732c33884158fe014eb576aa8580f670ece403706dfb64e2d6e741f50f3320b7bf08c7e8ec44a4b4
+  languageName: node
+  linkType: hard
+
 "prop-types@npm:^15.0.0":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
@@ -896,6 +917,13 @@ __metadata:
   version: 2.0.2
   resolution: "trough@npm:2.0.2"
   checksum: e0c18f3fb4c26e84d7864528f49a3f43a8fef8245d6ffe1fced90a867ea88be9838948fd98cf838da448700f5e4ec909576a469719db5e9833f5b58fed26dfa0
+  languageName: node
+  linkType: hard
+
+"ts-pattern@npm:^4.0.1":
+  version: 4.0.2
+  resolution: "ts-pattern@npm:4.0.2"
+  checksum: 1156c3dea42b9b9373d1c7c96bcd24d82a37701ab7fdd399178d58c350153c2322455d27459c8cb0d8fa445958632ffa776ed612fd656ffd35a94c79d5d3d5b8
   languageName: node
   linkType: hard
 

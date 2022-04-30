@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Contestant {
+  id      String @default(cuid()) @id
+  name    String
+  avatar  String
+}
+
+model Answer {
+  id          String @default(cuid()) @id
+  content     String
+  points      Int
+  questionId  String
+  question    Question @relation(fields: [questionId], references: [id])
+}
+
+model Question {
+  id              String @default(cuid()) @id
+  content         String
+  answers         Answer[]
+  questionSetId   String
+  questionSet     QuestionSet @relation(fields: [questionSetId], references: [id])
+}
+
+model QuestionSet {
+  id            String @default(cuid()) @id
+  name          String
+  questions     Question[]
+}
+
+model Game {
+  id            String @default(cuid()) @id
+  label         String
+  startedAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  questionSet   QuestionSet
+}
