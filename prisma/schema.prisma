@@ -11,37 +11,39 @@ datasource db {
 }
 
 model Contestant {
-  id      String @default(cuid()) @id
-  name    String
-  avatar  String
+  id     String @id @default(cuid())
+  name   String
+  avatar String
 }
 
 model Answer {
-  id          String @default(cuid()) @id
-  content     String
-  points      Int
-  questionId  String
-  question    Question @relation(fields: [questionId], references: [id])
+  id         String   @id @default(cuid())
+  content    String
+  points     Int
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id])
 }
 
 model Question {
-  id              String @default(cuid()) @id
-  content         String
-  answers         Answer[]
-  questionSetId   String
-  questionSet     QuestionSet @relation(fields: [questionSetId], references: [id])
+  id            String      @id @default(cuid())
+  content       String
+  answers       Answer[]
+  questionSetId String
+  questionSet   QuestionSet @relation(fields: [questionSetId], references: [id])
 }
 
 model QuestionSet {
-  id            String @default(cuid()) @id
-  name          String
-  questions     Question[]
+  id        String     @id @default(cuid())
+  name      String
+  questions Question[]
+  Game      Game[]
 }
 
 model Game {
-  id            String @default(cuid()) @id
+  id            String      @id @default(cuid())
   label         String
-  startedAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  questionSet   QuestionSet
+  startedAt     DateTime    @default(now()) @map(name: "created_at")
+  updatedAt     DateTime    @updatedAt @map(name: "updated_at")
+  questionSet   QuestionSet @relation(fields: [questionSetId], references: [id])
+  questionSetId String
 }
