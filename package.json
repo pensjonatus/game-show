@@ -6,12 +6,17 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "generate-prisma-client": "prisma generate",
+    "studio": "prisma studio",
+    "push-db": "prisma db push",
+    "format-model": "prisma format"
   },
   "keywords": [],
-  "author": "",
+  "author": "pensjonatus <pensjonatus@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^3.13.0",
     "next": "12.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",

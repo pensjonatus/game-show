@@ -10,10 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Contestant {
-  id     String @id @default(cuid())
-  name   String
-  avatar String
+model Team {
+  id        String      @id @default(cuid())
+  name      String
+  avatarUrl String?
+  states    TeamState[]
+  Game      Game[]
 }
 
 model Answer {
@@ -24,12 +26,22 @@ model Answer {
   question   Question @relation(fields: [questionId], references: [id])
 }
 
+model QuestionType {
+  id       String      @id @default(cuid())
+  name     String
+  Question Question[]
+  Round    RoundType[]
+}
+
 model Question {
-  id            String      @id @default(cuid())
-  content       String
-  answers       Answer[]
-  questionSetId String
-  questionSet   QuestionSet @relation(fields: [questionSetId], references: [id])
+  id             String       @id @default(cuid())
+  content        String
+  answers        Answer[]
+  questionSetId  String
+  questionSet    QuestionSet  @relation(fields: [questionSetId], references: [id])
+  type           QuestionType @relation(fields: [questionTypeId], references: [id])
+  questionTypeId String
+  Game           Game[]
 }
 
 model QuestionSet {
@@ -39,11 +51,36 @@ model QuestionSet {
   Game      Game[]
 }
 
+model TeamState {
+  id          String @id @default(cuid())
+  teamId      String
+  team        Team   @relation(fields: [teamId], references: [id])
+  gameId      String
+  game        Game   @relation(fields: [gameId], references: [id])
+  score       Int
+  chancesLeft Int    @default(3)
+}
+
+model RoundType {
+  id                  String       @id @default(cuid())
+  name                String
+  allowedQuestionType QuestionType @relation(fields: [questionTypeId], references: [id])
+  questionTypeId      String
+  Game                Game[]
+}
+
 model Game {
-  id            String      @id @default(cuid())
-  label         String
-  startedAt     DateTime    @default(now()) @map(name: "created_at")
-  updatedAt     DateTime    @updatedAt @map(name: "updated_at")
-  questionSet   QuestionSet @relation(fields: [questionSetId], references: [id])
-  questionSetId String
+  id              String      @id @default(cuid())
+  label           String
+  startedAt       DateTime    @default(now()) @map(name: "created_at")
+  updatedAt       DateTime    @updatedAt @map(name: "updated_at")
+  questionSet     QuestionSet @relation(fields: [questionSetId], references: [id])
+  questionSetId   String
+  teams           Team[]
+  teamStates      TeamState[]
+  currentRound    RoundType   @relation(fields: [roundId], references: [id])
+  roundId         String
+  finished        Boolean     @default(false)
+  currentQuestion Question    @relation(fields: [questionId], references: [id])
+  questionId      String
 }
