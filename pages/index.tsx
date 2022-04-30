@@ -1,32 +1,58 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import styles from '../styles/Home.module.css';
+import React from 'react';
+import { GetServerSideProps } from 'next';
+import Layout from '../components/Layout';
+import Post, { PostProps } from '../components/Post';
 
-export default function Home() {
+export const getServerSideProps: GetServerSideProps = async () => {
+  const feed = [
+    {
+      id: '1',
+      title: 'Prisma is the perfect ORM for Next.js',
+      content:
+        '[Prisma](https://github.com/prisma/prisma) and Next.js go _great_ together!',
+      published: false,
+      author: {
+        name: 'Nikolas Burk',
+        email: 'burk@prisma.io',
+      },
+    },
+  ];
+  return { props: { feed } };
+};
+
+type Props = {
+  feed: PostProps[];
+};
+
+const Blog: React.FC<Props> = (props) => {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>S.U.P.E.R. G.A.M.E.</title>
-        <meta
-          name="description"
-          content="That's right, it's S.U.P.E.R. G.A.M.E.!"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Layout>
+      <div className="page">
+        <h1>Public Feed</h1>
+        <main>
+          {props.feed.map((post) => (
+            <div key={post.id} className="post">
+              <Post post={post} />
+            </div>
+          ))}
+        </main>
+      </div>
+      <style jsx>{`
+        .post {
+          background: white;
+          transition: box-shadow 0.1s ease-in;
+        }
 
-      <main className={styles.main}>
-        <h1>Welcome to S.U.P.E.R. G.A.M.E.</h1>
-        <p>It's the game of games</p>
-        <div>Some div</div>
-        <article>
-          <h2>Let's learn some stuff</h2>
-          <p>
-            Belo lelo Belo lelo Belo lelo Belo lelo Belo lelo Belo lelo Belo
-            lelo Belo lelo Belo lelo Belo lelo Belo lelo Belo lelo Belo lelo
-            Belo lelo Belo lelo
-          </p>
-        </article>
-      </main>
-    </div>
+        .post:hover {
+          box-shadow: 1px 1px 3px #aaa;
+        }
+
+        .post + .post {
+          margin-top: 2rem;
+        }
+      `}</style>
+    </Layout>
   );
-}
+};
+
+export default Blog;
