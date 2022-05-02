@@ -73,7 +73,7 @@ const Header: React.FC = () => {
   }
 
   return (
-    <nav className={styles.header}>
+    <nav>
       {left}
       {right}
       <style jsx>{`
