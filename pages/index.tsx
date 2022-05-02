@@ -29,7 +29,12 @@ export default function Home(props) {
       body: JSON.stringify(data),
     });
 
-    console.log(result);
+    if (result.ok) {
+      const json = await result.json();
+      console.log(json);
+    } else {
+      console.error('POST did not succeed', endpointUrl, result);
+    }
   }
 
   return (
@@ -54,7 +59,7 @@ export default function Home(props) {
               {props.answers
                 .filter((answer: Answer) => answer.questionId === question.id)
                 .map((answer: Answer) => (
-                  <li>
+                  <li key={answer.id}>
                     {answer.content} ({answer.points})
                   </li>
                 ))}
@@ -67,7 +72,7 @@ export default function Home(props) {
         Add sample teams
       </button>
       <button
-        onClick={() => postToEndpoint('/api/questions', samples.questionSet)}
+        onClick={() => postToEndpoint('/api/questions', samples.questions)}
       >
         Add sample questions
       </button>

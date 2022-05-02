@@ -8,11 +8,6 @@ export type QuestionPrototype = {
   answers: Answer[];
 };
 
-export type QuestionSetPrototype = {
-  setName: string;
-  questions: QuestionPrototype[];
-};
-
 export type Team = {
   name: string;
   avatarUrl: string;

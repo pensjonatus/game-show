@@ -1,21 +1,15 @@
 import prisma from '../../../lib/prisma';
-import { QuestionSetPrototype, Answer } from '../../../lib/types';
-import { QuestionSet, QuestionType, Question } from '@prisma/client';
+import { Answer, QuestionPrototype } from '../../../lib/types';
+import { Prisma, QuestionType, Question } from '@prisma/client';
 
 export default async function handle(req, res) {
+  const questions: QuestionPrototype[] = req.body;
+  const allResults = [];
   try {
-    const questionSet: QuestionSetPrototype = req.body;
-    const createQuestionSet: QuestionSet = await prisma.questionSet.create({
-      data: {
-        name: questionSet.setName,
-      },
-    });
-    const questionSetId = createQuestionSet.id;
-    for await (const question of questionSet.questions) {
+    for await (const question of questions) {
       const createdQuestion: Question = await prisma.question.create({
         data: {
           content: question.question,
-          questionSetId: questionSetId,
           type: QuestionType.SINGLE,
           answers: {
             createMany: {
@@ -29,11 +23,28 @@ export default async function handle(req, res) {
       });
 
       if (!createdQuestion.id) {
-        throw new Error('Did not create the question');
+        throw new Error(
+          `Did not create the question, ${JSON.stringify(
+            createdQuestion,
+            null,
+            2
+          )}`
+        );
       }
+
+      allResults.push(createdQuestion);
     }
-    res.json({ result: 'OK' });
+    res.json({ result: 'OK', created: allResults });
   } catch (err) {
-    res.json({ error: err });
+    let code = 'unknown';
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      code = err.code;
+    }
+    res.json({
+      message: 'Creating questions: operation threw an unexpected error',
+      prismaCode: code,
+      prismaMessage: err.message,
+      error: err,
+    });
   }
 }
