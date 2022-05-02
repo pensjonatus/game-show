@@ -26,11 +26,12 @@ model Answer {
   question   Question @relation(fields: [questionId], references: [id])
 }
 
-model QuestionType {
-  id       String      @id @default(cuid())
-  name     String
-  Question Question[]
-  Round    RoundType[]
+enum QuestionType {
+  SINGLE
+  DOUBLE
+  TRIPLE
+  TUREFALSE
+  FINALE
 }
 
 model Question {
@@ -39,8 +40,7 @@ model Question {
   answers        Answer[]
   questionSetId  String
   questionSet    QuestionSet  @relation(fields: [questionSetId], references: [id])
-  type           QuestionType @relation(fields: [questionTypeId], references: [id])
-  questionTypeId String
+  type           QuestionType
   Game           Game[]
 }
 
@@ -64,8 +64,7 @@ model TeamState {
 model RoundType {
   id                  String       @id @default(cuid())
   name                String
-  allowedQuestionType QuestionType @relation(fields: [questionTypeId], references: [id])
-  questionTypeId      String
+  allowedQuestionType QuestionType
   Game                Game[]
 }
 
