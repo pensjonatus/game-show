@@ -1,0 +1,18 @@
+.header {
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.header a[data-active='true'] {
+  color: gray;
+}

@@ -75,3 +75,18 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+.button {
+  border: 1px solid var(--game-foreground);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  color: var(--game-foreground);
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button:hover {
+  color: white;
+  background-color: var(--game-foreground);
+}
