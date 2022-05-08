@@ -5,36 +5,30 @@ import { useRouter } from 'next/router';
 import { signOut, useSession } from 'next-auth/react';
 import styles from './Header.module.css';
 
-const HomeLink = ({ isActive }) => {
-  return (
-    <Link href="/">
-      <a className={styles.link} data-active={isActive('/')}>
-        <Image src="/logo.png" alt="logo" width="32" height="32" />
-      </a>
-    </Link>
-  );
-};
-
 const Header: React.FC = () => {
   const router = useRouter();
   const isActive: (pathname: string) => boolean = (pathname) =>
     router.pathname === pathname;
   const { data: session, status } = useSession();
 
-  let left = (
+  const left = (
     <div className={styles.left}>
-      <HomeLink isActive={isActive} />
+      <Link href="/">
+        <a>
+          <Image src="/logo.png" alt="logo" width="32" height="32" />
+        </a>
+      </Link>
+      <Link href="/game">
+        <a target="_blank" className="button">
+          Game
+        </a>
+      </Link>
     </div>
   );
 
   let right = null;
 
   if (status === 'loading') {
-    left = (
-      <div className={styles.left}>
-        <HomeLink isActive={isActive} />
-      </div>
-    );
     right = (
       <div className={styles.right}>
         <p>Validating session ...</p>
@@ -55,11 +49,6 @@ const Header: React.FC = () => {
   }
 
   if (session) {
-    left = (
-      <div className={styles.left}>
-        <HomeLink isActive={isActive} />
-      </div>
-    );
     right = (
       <div className={styles.right}>
         <p>

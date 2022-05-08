@@ -14,7 +14,7 @@ model Team {
   id        String  @id @default(cuid())
   name      String
   avatarUrl String?
-  score     Int @default(0)
+  score     Int     @default(0)
 }
 
 model Answer {
@@ -34,10 +34,18 @@ enum QuestionType {
 }
 
 model Question {
-  id            String       @id @default(cuid())
-  content       String
-  answers       Answer[]
-  type          QuestionType
+  id      String       @id @default(cuid())
+  content String
+  answers Answer[]
+  type    QuestionType
+  Game    Game[]
+}
+
+model Game {
+  id              String   @id @default(cuid())
+  inProgress      Boolean @default(false)
+  currentQuestion Question? @relation(fields: [questionId], references: [id])
+  questionId      String?
 }
 
 // Auth

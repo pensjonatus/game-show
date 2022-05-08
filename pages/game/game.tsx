@@ -1,26 +1,16 @@
-import { Question, Answer } from '@prisma/client';
-import { GetServerSideProps } from 'next/types';
-import prisma from '../../lib/prisma';
+import Head from 'next/head';
+import commons from '../../lib/commons';
+import GameInProgress from '../../components/GameInProgress/GameInProgress';
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const questions: Question[] = await prisma.question.findMany();
-  const answers: Answer[] = await prisma.answer.findMany();
-
-  const question: Question = questions[0];
-  const validAnswers = answers.filter(
-    (answer: Answer) => answer.questionId === question.id
-  );
-  return { props: { question, validAnswers } };
-};
-
-export default function Game(props) {
-  const { question, validAnswers } = props;
+export default function Game() {
   return (
     <>
-      <h1>{question?.content}</h1>
-      {validAnswers?.map((answer: Answer) => (
-        <div key={answer.id}>{answer.content}</div>
-      ))}
+      <Head>
+        <title>Game in progress | {commons.gameTitle}</title>
+      </Head>
+      <main style={{ height: '100vh', width: '100vw' }}>
+        <GameInProgress />
+      </main>
     </>
   );
 }

@@ -76,17 +76,41 @@ select {
   }
 }
 
-.button {
+.button,
+button {
   border: 1px solid var(--game-foreground);
   padding: 0.5rem 1rem;
   border-radius: 3px;
   color: var(--game-foreground);
+  background-color: transparent;
   font-weight: bold;
   text-decoration: none;
   display: inline-block;
+  cursor: pointer;
 }
 
-.button:hover {
+.button:hover,
+button:hover {
   color: white;
   background-color: var(--game-foreground);
+}
+
+.disabledButton {
+  background-color: lightgray;
+  color: gray;
+}
+
+.disabledButton:hover {
+  background-color: lightgray;
+  color: gray;
+}
+
+section {
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1100px;
 }
