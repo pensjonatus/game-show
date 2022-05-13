@@ -2,8 +2,8 @@ import { Answer } from '@prisma/client';
 import { useQuestion } from '../../../../lib/gameHooks';
 import { QuestionWithAnswers } from '../../../../lib/types';
 import Error from '../../../Error/Error';
+import DisplayAnswer from '../DisplayAnswer/DisplayAnswer';
 import Logo from '../Logo/Logo';
-import Mask from '../Mask/Mask';
 import styles from './CurrentQuestion.module.css';
 
 export default function CurrentQuestion({ questionId }) {
@@ -22,23 +22,14 @@ export default function CurrentQuestion({ questionId }) {
     return <div>💕💕💕</div>;
   }
 
+  question.answers.sort((a, b) => (a.points > b.points ? -1 : 1));
+
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.question}>{question.content}</h1>
       <ul className={styles.answers}>
         {question.answers.map((answer: Answer) => (
-          <li key={answer.id} className={styles.answerRow}>
-            <span>
-              {!answer.isUncovered ? answer.content : <Mask width="30ch" />}
-            </span>
-            <span>
-              {!answer.pointesAreRevealed ? (
-                answer.points
-              ) : (
-                <Mask width="4ch" />
-              )}
-            </span>
-          </li>
+          <DisplayAnswer answerId={answer.id} key={answer.id} />
         ))}
       </ul>
       <Logo />

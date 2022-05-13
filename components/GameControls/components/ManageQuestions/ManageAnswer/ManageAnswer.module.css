@@ -1,0 +1,16 @@
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.answer {
+  background-color: rgb(210, 236, 245);
+  margin: 6px 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 6px 3rem;
+}

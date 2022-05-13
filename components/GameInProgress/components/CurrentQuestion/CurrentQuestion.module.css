@@ -14,10 +14,3 @@
   font-size: 3vw;
   list-style: none;
 }
-
-.answerRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-}

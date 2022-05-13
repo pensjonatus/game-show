@@ -3,6 +3,7 @@ import { Question, Game, Team, Answer } from '@prisma/client';
 import { QuestionWithAnswers } from '../../../../lib/types';
 import styles from './ManageQuestions.module.css';
 import Error from '../../../Error/Error';
+import ManageAnswer from './ManageAnswer/ManageAnswer';
 
 export default function ManageQuestions() {
   const { questions, isError, isLoading } = useQuestions();
@@ -59,7 +60,7 @@ export default function ManageQuestions() {
       <ul className={styles.answerList}>
         {currentQuestion.answers.map((answer: Answer) => (
           <li key={answer.id} className={styles.answerRow}>
-            {answer.content} ({answer.points})
+            <ManageAnswer answerId={answer.id} />
           </li>
         ))}
       </ul>

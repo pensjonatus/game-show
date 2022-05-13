@@ -1,9 +1,9 @@
 .answerList {
-    list-style: none;
+  list-style: none;
 }
 
 .answerRow {
-    font-size: 1.5rem;
-    padding: 1rem;
-    width: 100%;
+  font-size: 1.1rem;
+  padding: 10px 2rem;
+  width: 100%;
 }

@@ -11,6 +11,7 @@ export default async function handle(
     try {
       const questions: Question[] = await prisma.question.findMany();
       const answers: Answer[] = await prisma.answer.findMany();
+      answers.sort((a: Answer, b: Answer) => (a.points > b.points ? -1 : 1));
       const questionsAndAnswers: QuestionWithAnswers[] = questions.map(
         (question: Question) => {
           const matchingAnswers: Answer[] = answers.filter(

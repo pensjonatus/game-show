@@ -38,13 +38,10 @@ export function useQuestions() {
   return getData('/api/questions', 'questions');
 }
 
-export function useQuestion(questionId: string | undefined) {
-  if (!questionId) {
-    return {
-      question: undefined,
-      isLoading: false,
-      isError: false,
-    };
-  }
+export function useQuestion(questionId: string) {
   return getData(`/api/questions/${questionId}`, 'question');
+}
+
+export function useAnswer(answerId: string) {
+  return getData(`/api/answers/${answerId}`, 'answer');
 }

@@ -78,10 +78,11 @@ select {
 
 .button,
 button {
-  border: 1px solid var(--game-foreground);
+  --accent-color: var(--game-foreground);
+  border: 1px solid var(--accent-color);
   padding: 0.5rem 1rem;
   border-radius: 3px;
-  color: var(--game-foreground);
+  color: var(--accent-color);
   background-color: transparent;
   font-weight: bold;
   text-decoration: none;
@@ -92,7 +93,26 @@ button {
 .button:hover,
 button:hover {
   color: white;
-  background-color: var(--game-foreground);
+  background-color: var(--accent-color);
+}
+
+.smallButton {
+  font-size: 0.9rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.blackButton {
+  --accent-color: black;
+}
+
+.flippedButton {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.flippedButton:hover {
+  background-color: transparent;
+  color: var(--accent-color);
 }
 
 .disabledButton {

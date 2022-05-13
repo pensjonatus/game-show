@@ -21,7 +21,7 @@ model Answer {
   id                 String   @id @default(cuid())
   content            String
   points             Int
-  isUncovered        Boolean  @default(false)
+  isRevealed         Boolean  @default(false)
   pointesAreRevealed Boolean  @default(false)
   questionId         String
   question           Question @relation(fields: [questionId], references: [id])
