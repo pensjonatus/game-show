@@ -1,30 +1,32 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import samples from '../../lib/samples';
+import Error from '../Error/Error';
 
 export default function DataManager() {
   const [initializing, setInitializing] = useState(false);
-
-  async function postToEndpoint(endpointUrl, data) {
-    const result = await fetch(endpointUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-
-    if (result.ok) {
-      const json = await result.json();
-      console.log(json);
-    } else {
-      console.error('POST did not succeed', endpointUrl, result);
-    }
-  }
+  const [error, setError] = useState(undefined);
 
   async function initializeData() {
     if (!initializing) {
       setInitializing(true);
-      await postToEndpoint('/api/teams', samples.teams);
-      await postToEndpoint('/api/questions', samples.questions);
+      setError(undefined);
+      const endpointUrl = '/api/initialize';
+      const result = await fetch(endpointUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(samples),
+      });
+
+      if (result.ok) {
+        const json = await result.json();
+        console.log(json);
+      } else {
+        const problem = await result.json();
+        console.error(problem);
+        setError(problem);
+      }
+      setInitializing(false);
     }
   }
 
@@ -37,6 +39,7 @@ export default function DataManager() {
       >
         Load data
       </button>
+      {error && <Error title="Cannot initialize data 😖" gameError={error} />}
     </>
   );
 }

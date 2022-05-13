@@ -42,6 +42,17 @@ export default function ManageQuestions() {
     (q: Question) => q.id === game.questionId
   );
 
+  if (!currentQuestion) {
+    return (
+      <Error
+        title="No question selected? 🤔"
+        gameError={{
+          message: `No question set in current game: ${JSON.stringify(game)}`,
+        }}
+      />
+    );
+  }
+
   return (
     <div>
       <h3>{currentQuestion.content}</h3>

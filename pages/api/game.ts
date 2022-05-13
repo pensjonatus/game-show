@@ -1,8 +1,8 @@
-import prisma from '../../../lib/prisma';
+import prisma from '../../lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Game, Question, Team } from '@prisma/client';
-import commons from '../../../lib/commons';
-import { BackendError } from '../../../lib/types';
+import commons from '../../lib/commons';
+import { BackendError } from '../../lib/types';
 
 async function createInitialGameState() {}
 

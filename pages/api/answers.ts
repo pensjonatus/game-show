@@ -1,6 +1,6 @@
-import prisma from '../../../lib/prisma';
+import prisma from '../../lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { BackendError } from '../../../lib/types';
+import { BackendError } from '../../lib/types';
 import { Answer } from '@prisma/client';
 
 export default async function handle(

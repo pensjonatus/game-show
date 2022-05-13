@@ -1,4 +1,4 @@
-import { Answer, Question } from '@prisma/client';
+import { Answer, Game, Question, Team } from '@prisma/client';
 
 export type AnswerPrototype = {
   answer: string;
@@ -8,11 +8,6 @@ export type AnswerPrototype = {
 export type QuestionPrototype = {
   question: string;
   answers: AnswerPrototype[];
-};
-
-export type Team = {
-  name: string;
-  avatarUrl: string;
 };
 
 export type QuestionWithAnswers = Question & {
@@ -26,4 +21,10 @@ export type BackendError = {
       message?: string;
     };
   };
+};
+
+export type Sample = {
+  teams: Team[];
+  questions: QuestionPrototype[];
+  game: Game;
 };

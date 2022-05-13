@@ -1,12 +1,11 @@
-import { QuestionPrototype } from './types';
-import { Team } from '@prisma/client';
-
-type Sample = {
-  teams: Team[];
-  questions: QuestionPrototype[];
-};
+import { Sample } from './types';
 
 const samples: Sample = {
+  game: {
+    id: '0',
+    inProgress: false,
+    questionId: undefined,
+  },
   teams: [
     {
       id: '0',
