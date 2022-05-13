@@ -2,12 +2,13 @@ import { useTeams } from '../../lib/gameHooks';
 import { Team } from '@prisma/client';
 import TeamDisplay from '../TeamDisplay';
 import styles from './TwoTeams.module.css';
+import Error from '../Error/Error';
 
 export default function TwoTeams() {
   const { teams, isError, isLoading } = useTeams();
 
   if (isError) {
-    return <div>Error getting teams</div>;
+    return <Error title="Error getting teams" gameError={isError} />;
   }
 
   if (isLoading) {

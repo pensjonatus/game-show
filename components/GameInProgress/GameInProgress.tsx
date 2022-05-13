@@ -1,12 +1,13 @@
 import commons from '../../lib/commons';
 import { useGame } from '../../lib/gameHooks';
 import styles from './GameInProgress.module.css';
+import Error from '../Error/Error';
 
 export default function GameInProgress() {
   const { game, isError, isLoading } = useGame();
 
   if (isError) {
-    return <div className={styles.wrapper}>Error getting current game</div>;
+    return <Error title="Error getting current game" gameError={isError} />;
   }
 
   if (isLoading) {

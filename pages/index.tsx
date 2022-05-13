@@ -1,6 +1,5 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import samples from '../lib/samples';
 import TwoTeams from '../components/TwoTeams/TwoTeams';
 import styles from './Home.module.css';
 import AllQuestions from '../components/AllQuestions/AllQuestions';
@@ -8,21 +7,7 @@ import commons from '../lib/commons.js';
 import Head from 'next/head';
 import GameControls from '../components/GameControls/GameControls';
 
-export default function Home(props) {
-  async function postToEndpoint(endpointUrl, data) {
-    const result = await fetch(endpointUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-
-    if (result.ok) {
-      const json = await result.json();
-      console.log(json);
-    } else {
-      console.error('POST did not succeed', endpointUrl, result);
-    }
-  }
+export default function Home() {
 
   return (
     <Layout>
@@ -42,15 +27,7 @@ export default function Home(props) {
         <AllQuestions />
       </section>
       <section className={styles.adminZone}>
-        <h2>Manage data</h2>
-        <button onClick={() => postToEndpoint('/api/teams', samples.teams)}>
-          Add sample teams
-        </button>
-        <button
-          onClick={() => postToEndpoint('/api/questions', samples.questions)}
-        >
-          Add sample questions
-        </button>
+        
       </section>
     </Layout>
   );

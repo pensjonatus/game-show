@@ -18,3 +18,7 @@ export type Team = {
 export type QuestionWithAnswers = Question & {
   answers: Answer[];
 };
+
+export type BackendError = {
+  message: string;
+};

@@ -59,16 +59,22 @@ export default async function handle(
   }
 
   if (req.method === 'GET') {
-    const questions: Question[] = await prisma.question.findMany();
-    const answers: Answer[] = await prisma.answer.findMany();
-    const questionsAndAnswers: QuestionWithAnswers[] = questions.map(
-      (question: Question) => {
-        const matchingAnswers: Answer[] = answers.filter(
-          (answer: Answer) => answer.questionId === question.id
-        );
-        return { answers: matchingAnswers, ...question };
-      }
-    );
-    res.json(questionsAndAnswers);
+    try {
+      const questions: Question[] = await prisma.question.findMany();
+      const answers: Answer[] = await prisma.answer.findMany();
+      const questionsAndAnswers: QuestionWithAnswers[] = questions.map(
+        (question: Question) => {
+          const matchingAnswers: Answer[] = answers.filter(
+            (answer: Answer) => answer.questionId === question.id
+          );
+          return { answers: matchingAnswers, ...question };
+        }
+      );
+      res.json(questionsAndAnswers);
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: `Error getting questions: ${err.message}` });
+    }
   }
 }

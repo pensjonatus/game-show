@@ -2,6 +2,7 @@ import { useGame, useQuestions, useTeams } from '../../../../lib/gameHooks';
 import { Question, Game, Team, Answer } from '@prisma/client';
 import { QuestionWithAnswers } from '../../../../lib/types';
 import styles from './ManageQuestions.module.css';
+import Error from '../../../Error/Error';
 
 export default function ManageQuestions() {
   const { questions, isError, isLoading } = useQuestions();
@@ -14,8 +15,18 @@ export default function ManageQuestions() {
   const { isError: gameIsError, isLoading: gameIsLoading } = gameProps;
   const game: Game = gameProps.game;
 
-  if (isError || teamsIsError || gameIsError) {
-    return <div>Whoops! Cannot get questions</div>;
+  if (isError) {
+    return <Error title="Whoops! Cannot get questions" gameError={isError} />;
+  }
+
+  if (teamsIsError) {
+    return (
+      <Error title="Yikes! Error getting teams" gameError={teamsIsError} />
+    );
+  }
+
+  if (gameIsError) {
+    return <Error title="Oh boy! Can't get game" gameError={gameIsError} />;
   }
 
   if (isLoading || teamsIsLoading || gameIsLoading) {

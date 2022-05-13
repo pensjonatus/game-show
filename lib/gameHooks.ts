@@ -5,13 +5,22 @@ const options: SWRConfiguration = { refreshInterval: 1000 };
 const fetcher = async (url) => await axios.get(url).then((res) => res.data);
 
 function getData(endpoint: string, dataFieldName: string) {
-  const { data, error } = useSWR(endpoint, fetcher, options);
+  try {
+    const { data, error } = useSWR(endpoint, fetcher, options);
 
-  return {
-    [dataFieldName]: data,
-    isLoading: !error && !data,
-    isError: error,
-  };
+    return {
+      [dataFieldName]: data,
+      isLoading: !error && !data,
+      isError: error,
+    };
+  } catch (err) {
+    console.error(
+      `Problem getting data
+          Endpoint: ${endpoint}
+          Data field name: ${dataFieldName}
+          ERROR: ${err.message}`
+    );
+  }
 }
 
 export function useGame() {
