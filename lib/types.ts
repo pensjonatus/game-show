@@ -20,10 +20,10 @@ export type QuestionWithAnswers = Question & {
 };
 
 export type BackendError = {
-  message: string;
-  response: {
-    data: {
-      message: string;
+  message: string | null;
+  response?: {
+    data?: {
+      message?: string;
     };
   };
 };
