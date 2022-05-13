@@ -6,9 +6,9 @@ import AllQuestions from '../components/AllQuestions/AllQuestions';
 import commons from '../lib/commons.js';
 import Head from 'next/head';
 import GameControls from '../components/GameControls/GameControls';
+import DataManager from '../components/DataManager/DataManager';
 
 export default function Home() {
-
   return (
     <Layout>
       <Head>
@@ -27,7 +27,7 @@ export default function Home() {
         <AllQuestions />
       </section>
       <section className={styles.adminZone}>
-        
+        <DataManager />
       </section>
     </Layout>
   );

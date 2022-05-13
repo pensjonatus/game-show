@@ -18,7 +18,8 @@ export default async function handle(
     const teams = await prisma.team.findMany();
     if (!teams) {
       res.status(500).json({ message: `No teams in the database` });
+    } else {
+      res.json(teams);
     }
-    res.json(teams);
   }
 }

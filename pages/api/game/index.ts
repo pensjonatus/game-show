@@ -95,9 +95,6 @@ export default async function handle(
 ) {
   const { gameCommands } = commons;
   const gameState: Game = await prisma.game.findFirst();
-  if (!gameState) {
-    res.status(500).json({ message: 'Could not fetch game state' });
-  }
   if (req.method === 'POST') {
     const { command } = req.body;
 
