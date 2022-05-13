@@ -1,15 +1,5 @@
-.left,
-.right {
+.nav {
   display: flex;
+  padding: 2rem;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.right {
-  margin-left: auto;
-}
-
-.header a[data-active='true'] {
-  color: gray;
 }
