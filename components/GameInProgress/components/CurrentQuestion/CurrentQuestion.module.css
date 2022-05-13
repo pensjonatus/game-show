@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  text-align: center;
+}
+
+.question {
+  flex: 1;
+  font-size: 3vw;
+}
+
+.answers {
+  font-size: 3vw;
+  list-style: none;
+}
+
+.answerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}

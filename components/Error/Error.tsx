@@ -11,7 +11,9 @@ export default function Error({
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>{title}</div>
-      <div>{gameError.response?.data?.message || gameError.message}</div>
+      <code className={styles.errorDetails}>
+        <pre>{gameError.response?.data?.message || gameError.message}</pre>
+      </code>
     </div>
   );
 }

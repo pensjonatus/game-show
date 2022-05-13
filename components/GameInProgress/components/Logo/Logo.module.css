@@ -1,0 +1,38 @@
+@keyframes appear {
+    0% {
+      opacity: 1;
+      transform: translateY(-50%);
+      width: 50%;
+    }
+  
+    25% {
+      opacity: 1;
+      transform: rotate(31deg);
+    }
+  
+    50% {
+      transform: rotate(-41deg);
+      width: 55%;
+    }
+  
+    75% {
+      transform: translateY(42%);
+    }
+  
+    100% {
+      display: none;
+    }
+  }
+  
+  .logo {
+    position: absolute;
+    z-index: 100;
+    margin: auto;
+    animation: appear 1s ease;
+    animation-iteration-count: 1;
+    opacity: 0;
+    border-radius: 34%;
+    overflow: hidden;
+    width: 0;
+  }
+  

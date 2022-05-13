@@ -1,10 +1,6 @@
 import prisma from '../../lib/prisma';
-import {
-  AnswerPrototype,
-  QuestionPrototype,
-  QuestionWithAnswers,
-} from '../../lib/types';
-import { Answer, Prisma, QuestionType, Question } from '@prisma/client';
+import { QuestionWithAnswers } from '../../lib/types';
+import { Answer, Question } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handle(

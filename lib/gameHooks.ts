@@ -37,3 +37,14 @@ export function useTeams() {
 export function useQuestions() {
   return getData('/api/questions', 'questions');
 }
+
+export function useQuestion(questionId: string | undefined) {
+  if (!questionId) {
+    return {
+      question: undefined,
+      isLoading: false,
+      isError: false,
+    };
+  }
+  return getData(`/api/questions/${questionId}`, 'question');
+}
