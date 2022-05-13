@@ -14,12 +14,15 @@ function getData(endpoint: string, dataFieldName: string) {
       isError: error,
     };
   } catch (err) {
-    console.error(
-      `Problem getting data
-          Endpoint: ${endpoint}
-          Data field name: ${dataFieldName}
-          ERROR: ${err.message}`
-    );
+    const myErrorMessage = `Problem getting data
+      Endpoint: ${endpoint}
+      Data field name: ${dataFieldName}
+      ERROR: ${err.message}`;
+    return {
+      [dataFieldName]: undefined,
+      isLoading: false,
+      isError: { message: myErrorMessage },
+    };
   }
 }
 

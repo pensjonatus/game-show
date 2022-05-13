@@ -27,7 +27,6 @@ export default function StartStop() {
   }
 
   async function postToGameState(command) {
-    console.log('Attempting to send command', command);
     const result = await fetch('/api/game', {
       method: 'POST',
       headers: {
@@ -40,7 +39,6 @@ export default function StartStop() {
 
     if (result.ok) {
       const json = await result.json();
-      console.log(json);
 
       return json;
     } else {

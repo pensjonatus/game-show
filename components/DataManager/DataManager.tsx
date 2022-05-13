@@ -20,10 +20,8 @@ export default function DataManager() {
 
       if (result.ok) {
         const json = await result.json();
-        console.log(json);
       } else {
         const problem = await result.json();
-        console.error(problem);
         setError(problem);
       }
       setInitializing(false);
