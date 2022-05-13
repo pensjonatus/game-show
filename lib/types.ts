@@ -21,4 +21,9 @@ export type QuestionWithAnswers = Question & {
 
 export type BackendError = {
   message: string;
+  response: {
+    data: {
+      message: string;
+    };
+  };
 };

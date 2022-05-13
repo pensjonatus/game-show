@@ -111,6 +111,12 @@ export default async function handle(
         break;
     }
   } else if (req.method === 'GET') {
-    res.json(gameState);
+    if (!gameState) {
+      res
+        .status(500)
+        .json({ message: 'Cannot get game state. No game exists!' });
+    } else {
+      res.json(gameState);
+    }
   }
 }

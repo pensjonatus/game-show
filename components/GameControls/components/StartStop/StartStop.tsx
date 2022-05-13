@@ -14,7 +14,12 @@ export default function StartStop() {
   const { isError, isLoading } = gameProps;
 
   if (isError) {
-    return <Error title="Error getting current game! 😒" gameError={isError} />;
+    return (
+      <Error
+        title="Error setting up the start/stop buttons! 😒"
+        gameError={isError}
+      />
+    );
   }
 
   if (isLoading) {

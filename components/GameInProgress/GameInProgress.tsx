@@ -7,7 +7,7 @@ export default function GameInProgress() {
   const { game, isError, isLoading } = useGame();
 
   if (isError) {
-    return <Error title="Error getting current game" gameError={isError} />;
+    return <Error title="Error getting game status 💔" gameError={isError} />;
   }
 
   if (isLoading) {

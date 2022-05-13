@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import samples from '../../lib/samples';
 
-export default function Initializer() {
+export default function DataManager() {
   const [initializing, setInitializing] = useState(false);
 
   async function postToEndpoint(endpointUrl, data) {

@@ -26,7 +26,12 @@ export default function ManageQuestions() {
   }
 
   if (gameIsError) {
-    return <Error title="Oh boy! Can't get game" gameError={gameIsError} />;
+    return (
+      <Error
+        title="Oh boy! Can't get the game to manage questions off of 😵"
+        gameError={gameIsError}
+      />
+    );
   }
 
   if (isLoading || teamsIsLoading || gameIsLoading) {
