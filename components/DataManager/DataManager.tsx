@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import { postToEndpoint } from '../../lib/apiHelpers';
 import samples from '../../lib/samples';
 import GameError from '../GameError/GameError';
 
@@ -11,16 +12,9 @@ export default function DataManager() {
     if (!initializing) {
       setInitializing(true);
       setError(undefined);
-      const endpointUrl = '/api/initialize';
-      const result = await fetch(endpointUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(samples),
-      });
+      const result = await postToEndpoint('/api/initialize', samples);
 
-      if (result.ok) {
-        const json = await result.json();
-      } else {
+      if (!result.ok) {
         const problem = await result.json();
         setError(problem);
       }

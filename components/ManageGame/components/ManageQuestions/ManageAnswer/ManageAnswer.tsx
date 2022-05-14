@@ -1,6 +1,7 @@
 import { Answer, Team } from '@prisma/client';
 import clsx from 'clsx';
 import { useState } from 'react';
+import { postToEndpoint } from '../../../../../lib/apiHelpers';
 import commons from '../../../../../lib/commons';
 import { useAnswer, useTeams } from '../../../../../lib/gameHooks';
 import GameError from '../../../../GameError/GameError';
@@ -43,12 +44,8 @@ export default function ManageAnswer({ answerId }) {
     if (!processing) {
       setProcessing(true);
 
-      const result = await fetch(`/api/answers/${answerId}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          command: commons.answerCommands.toggleIsRevealed,
-        }),
+      const result = await postToEndpoint(`/api/answers/${answerId}`, {
+        command: commons.answerCommands.toggleIsRevealed,
       });
 
       if (!result.ok) {

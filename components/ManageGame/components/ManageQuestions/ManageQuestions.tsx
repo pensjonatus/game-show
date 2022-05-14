@@ -4,8 +4,11 @@ import { QuestionWithAnswers } from '../../../../lib/types';
 import styles from './ManageQuestions.module.css';
 import GameError from '../../../GameError/GameError';
 import ManageAnswer from './ManageAnswer/ManageAnswer';
+import { useState } from 'react';
+import ManageChancesLost from './ManageChancesLost/ManageChancesLost';
 
 export default function ManageQuestions() {
+  // Game hooks
   const { questions, isError, isLoading } = useQuestions();
   const {
     teams,
@@ -16,6 +19,7 @@ export default function ManageQuestions() {
   const { isError: gameIsError, isLoading: gameIsLoading } = gameProps;
   const game: Game = gameProps.game;
 
+  // Optional renders
   if (!game || !game.inProgress) {
     return null;
   }
@@ -63,6 +67,7 @@ export default function ManageQuestions() {
   return (
     <div className={styles.wrapper}>
       <h3>{currentQuestion.content}</h3>
+      <ManageChancesLost />
       <ul className={styles.answerList}>
         {currentQuestion.answers.map((answer: Answer) => (
           <li key={answer.id} className={styles.answerRow}>

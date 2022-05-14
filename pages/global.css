@@ -105,6 +105,16 @@ button:hover {
   --accent-color: black;
 }
 
+.redButton {
+  --accent-color: red;
+  color: black !important;
+}
+
+.redButton:hover {
+  transform: scale(1.2);
+  background-color: red !important;
+}
+
 .flippedButton {
   background-color: var(--accent-color);
   color: white;

@@ -11,10 +11,11 @@ datasource db {
 }
 
 model Team {
-  id        String  @id @default(cuid())
-  name      String
-  avatarUrl String?
-  score     Int     @default(0)
+  id          String  @id @default(cuid())
+  name        String
+  avatarUrl   String?
+  score       Int     @default(0)
+  chancesLost Int     @default(0)
 }
 
 model Answer {

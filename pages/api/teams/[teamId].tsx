@@ -20,7 +20,7 @@ export default async function handler(
 
       switch (command) {
         case commons.teamCommands.addPoints:
-          const update = await prisma.team.update({
+          const updateScore = await prisma.team.update({
             where: {
               id: teamId,
             },
@@ -28,7 +28,18 @@ export default async function handler(
               score: team.score + amount,
             },
           });
-          res.json(update);
+          res.json(updateScore);
+          break;
+
+        case commons.teamCommands.setChancesLost:
+          const { value } = req.body;
+          const updateChances = await prisma.team.update({
+            where: {
+              id: teamId,
+            },
+            data: { chancesLost: value },
+          });
+          res.send({ updateChances });
           break;
 
         default:

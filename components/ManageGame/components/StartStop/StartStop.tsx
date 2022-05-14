@@ -5,6 +5,7 @@ import commons from '../../../../lib/commons';
 import styles from './StartStop.module.css';
 import clsx from 'clsx';
 import GameError from '../../../GameError/GameError';
+import { postToEndpoint } from '../../../../lib/apiHelpers';
 
 export default function StartStop() {
   const [startButtonDisabled, setStartButtonDisabled] = useState(false);
@@ -27,14 +28,8 @@ export default function StartStop() {
   }
 
   async function postToGameState(command) {
-    const result = await fetch('/api/game', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        command: command,
-      }),
+    const result = await postToEndpoint('/api/game', {
+      command: command,
     });
 
     if (result.ok) {

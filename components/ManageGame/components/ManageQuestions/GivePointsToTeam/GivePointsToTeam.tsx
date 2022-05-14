@@ -4,7 +4,10 @@ import { useState } from 'react';
 import commons from '../../../../../lib/commons';
 import { useTeam } from '../../../../../lib/gameHooks';
 import GameError from '../../../../GameError/GameError';
-import { setPointsAlreadyGiven } from '../lib/apiHelpers';
+import {
+  postToEndpoint,
+  setPointsAlreadyGiven,
+} from '../../../../../lib/apiHelpers';
 
 export default function GivePointsToTeam({
   teamId,
@@ -28,24 +31,14 @@ export default function GivePointsToTeam({
     return <span>loading</span>;
   }
 
-  async function addPointsToTeamScore() {
-    const result = await fetch(`/api/teams/${teamId}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        command: commons.teamCommands.addPoints,
-        amount: points,
-      }),
-    });
-
-    return result;
-  }
-
   async function givePoints() {
     if (!pointsAlreadyGiven && !processing) {
       setProcessing(true);
-      const result = await addPointsToTeamScore();
-      if (!result.ok) {
+      const addPointsResult = await postToEndpoint(`/api/teams/${teamId}`, {
+        command: commons.teamCommands.addPoints,
+        amount: points,
+      });
+      if (!addPointsResult.ok) {
         throw new Error('Cannot add points');
       }
 
