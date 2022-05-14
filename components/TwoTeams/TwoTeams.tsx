@@ -8,7 +8,7 @@ export default function TwoTeams() {
   const { teams, isError, isLoading } = useTeams();
 
   if (isError) {
-    return <GameError title="Error getting teams" gameError={isError} />;
+    return <GameError title="Error getting teams" errorDetails={isError} />;
   }
 
   if (isLoading) {

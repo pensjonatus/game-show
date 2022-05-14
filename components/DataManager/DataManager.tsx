@@ -32,7 +32,7 @@ export default function DataManager() {
         Load data
       </button>
       {error && (
-        <GameError title="Cannot initialize data 😖" gameError={error} />
+        <GameError title="Cannot initialize data 😖" errorDetails={error} />
       )}
     </>
   );

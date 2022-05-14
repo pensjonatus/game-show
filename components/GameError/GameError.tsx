@@ -3,16 +3,18 @@ import styles from './GameError.module.css';
 
 export default function GameError({
   title,
-  gameError,
+  errorDetails,
 }: {
   title: string;
-  gameError: BackendError;
+  errorDetails: BackendError;
 }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>{title}</div>
       <code className={styles.errorDetails}>
-        <pre>{gameError.response?.data?.message || gameError.message}</pre>
+        <pre>
+          {errorDetails.response?.data?.message || errorDetails.message}
+        </pre>
       </code>
     </div>
   );

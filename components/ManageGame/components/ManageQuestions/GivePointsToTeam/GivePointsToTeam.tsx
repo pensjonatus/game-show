@@ -24,7 +24,7 @@ export default function GivePointsToTeam({
   }: { [x: string]: Team; isError: any; isLoading: any } = useTeam(teamId);
 
   if (isError) {
-    return <GameError title="Problem with the answer" gameError={isError} />;
+    return <GameError title="Problem with the answer" errorDetails={isError} />;
   }
 
   if (isLoading) {

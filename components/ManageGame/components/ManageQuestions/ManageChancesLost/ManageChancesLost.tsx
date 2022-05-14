@@ -1,6 +1,7 @@
 import { Team } from '@prisma/client';
 import clsx from 'clsx';
 import { isResSent } from 'next/dist/shared/lib/utils';
+import { useState } from 'react';
 import { postToEndpoint } from '../../../../../lib/apiHelpers';
 import commons from '../../../../../lib/commons';
 import { useTeams } from '../../../../../lib/gameHooks';
@@ -9,11 +10,15 @@ import LostChances from '../../../../LostChances/LostChances';
 import styles from './ManageChancesLost.module.css';
 
 export default function ManageChancesLost() {
+  const [processing, setProcessing] = useState(false);
   const { teams, isError, isLoading } = useTeams();
 
   if (isError) {
     return (
-      <GameError title="Something wrong with teams 🐱‍👤" gameError={isError} />
+      <GameError
+        title="Something wrong with teams 🐱‍👤"
+        errorDetails={isError}
+      />
     );
   }
 
@@ -26,15 +31,21 @@ export default function ManageChancesLost() {
     );
   }
 
-  async function addLostChance(team: Team) {
-    const result = await postToEndpoint(`/api/teams/${team.id}`, {
-      command: commons.teamCommands.setChancesLost,
-      value: team.chancesLost + 1,
-    });
+  async function changeNumberOfChances(team: Team, amount: number) {
+    if (!processing) {
+      const result = await postToEndpoint(`/api/teams/${team.id}`, {
+        command: commons.teamCommands.setChancesLost,
+        value: team.chancesLost + amount,
+      });
 
-    if (!result.ok) {
-      const json = await result.json();
-      throw new Error(`Problem adding a lost chance ${JSON.stringify(json)}`);
+      if (!result.ok) {
+        const json = await result.json();
+        throw new Error(
+          `Problem changing the number of chances (${amount}) ${JSON.stringify(
+            json
+          )}`
+        );
+      }
     }
   }
 
@@ -44,8 +55,12 @@ export default function ManageChancesLost() {
         {teams.map((team: Team) => (
           <button
             key={team.id}
-            className={clsx('redButton', 'flippedButton')}
-            onClick={() => addLostChance(team)}
+            className={clsx(
+              'redButton',
+              'flippedButton',
+              processing && 'disabledButton'
+            )}
+            onClick={() => changeNumberOfChances(team, 1)}
           >
             {team.name} answered wrong!
           </button>
@@ -53,8 +68,20 @@ export default function ManageChancesLost() {
       </div>
       <div className={styles.row}>
         {teams.map((team: Team) => (
-          <span>
-            <LostChances howMany={team.chancesLost} />
+          <span className={styles.lostChances}>
+            <LostChances howMany={team.chancesLost} playSound={false} />
+            {team.chancesLost > 0 && (
+              <span
+                role="button"
+                className={clsx(
+                  styles.restoreOne,
+                  processing && styles.disabled
+                )}
+                onClick={() => changeNumberOfChances(team, -1)}
+              >
+                ✖
+              </span>
+            )}
           </span>
         ))}
       </div>

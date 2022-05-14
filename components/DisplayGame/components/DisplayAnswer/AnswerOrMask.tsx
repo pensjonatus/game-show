@@ -4,7 +4,7 @@ import Mask from '../Mask/Mask';
 
 export default function AnswerOrMask({ isRevealed, content }) {
   const [playingReveal, toggleReveal] = useAudio('/resources/reveal.wav');
-
+  
   useEffect(
     function () {
       if (isRevealed && !playingReveal) {

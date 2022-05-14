@@ -7,7 +7,7 @@ export default function AllQuestions() {
   const { questions, isError, isLoading } = useQuestions();
 
   if (isError) {
-    return <GameError gameError={isError} title="Cannot load questions" />;
+    return <GameError errorDetails={isError} title="Cannot load questions" />;
   }
 
   if (isLoading) {

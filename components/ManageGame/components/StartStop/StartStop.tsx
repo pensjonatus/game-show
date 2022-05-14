@@ -18,7 +18,7 @@ export default function StartStop() {
     return (
       <GameError
         title="Error setting up the start/stop buttons! 😒"
-        gameError={isError}
+        errorDetails={isError}
       />
     );
   }

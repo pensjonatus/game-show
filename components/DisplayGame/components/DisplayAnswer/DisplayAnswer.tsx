@@ -16,7 +16,9 @@ export default function DisplayAnswer({ answerId }) {
     useAnswer(answerId);
 
   if (isError) {
-    return <GameError title="Couldn't get current error" gameError={isError} />;
+    return (
+      <GameError title="Couldn't get current error" errorDetails={isError} />
+    );
   }
 
   if (isLoading) {

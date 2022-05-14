@@ -29,11 +29,13 @@ export default function ManageAnswer({ answerId }) {
 
   // Returns in case of problems
   if (isError) {
-    return <GameError title="Couldn't get current error" gameError={isError} />;
+    return (
+      <GameError title="Couldn't get current error" errorDetails={isError} />
+    );
   }
 
   if (teamsError) {
-    return <GameError title="Cannot load teams ⛹️‍♀️" gameError={teamsError} />;
+    return <GameError title="Cannot load teams ⛹️‍♀️" errorDetails={teamsError} />;
   }
 
   if (isLoading || teamsLoading) {
@@ -83,7 +85,7 @@ export default function ManageAnswer({ answerId }) {
           {answer.content} ({answer.points})
         </span>
         {updateError && (
-          <GameError title="Can't update answer" gameError={updateError} />
+          <GameError title="Can't update answer" errorDetails={updateError} />
         )}
       </span>
       <span>

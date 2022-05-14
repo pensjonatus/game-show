@@ -1,20 +1,14 @@
-import { useGame, useQuestions, useTeams } from '../../../../lib/gameHooks';
-import { Question, Game, Team, Answer } from '@prisma/client';
+import { useGame, useQuestions } from '../../../../lib/gameHooks';
+import { Question, Game, Answer } from '@prisma/client';
 import { QuestionWithAnswers } from '../../../../lib/types';
 import styles from './ManageQuestions.module.css';
 import GameError from '../../../GameError/GameError';
 import ManageAnswer from './ManageAnswer/ManageAnswer';
-import { useState } from 'react';
 import ManageChancesLost from './ManageChancesLost/ManageChancesLost';
 
 export default function ManageQuestions() {
   // Game hooks
   const { questions, isError, isLoading } = useQuestions();
-  const {
-    teams,
-    isError: teamsIsError,
-    isLoading: teamsIsLoading,
-  } = useTeams();
   const gameProps = useGame();
   const { isError: gameIsError, isLoading: gameIsLoading } = gameProps;
   const game: Game = gameProps.game;
@@ -26,13 +20,7 @@ export default function ManageQuestions() {
 
   if (isError) {
     return (
-      <GameError title="Whoops! Cannot get questions" gameError={isError} />
-    );
-  }
-
-  if (teamsIsError) {
-    return (
-      <GameError title="Yikes! Error getting teams" gameError={teamsIsError} />
+      <GameError title="Whoops! Cannot get questions" errorDetails={isError} />
     );
   }
 
@@ -40,12 +28,12 @@ export default function ManageQuestions() {
     return (
       <GameError
         title="Oh boy! Can't get the game to manage questions off of 😵"
-        gameError={gameIsError}
+        errorDetails={gameIsError}
       />
     );
   }
 
-  if (isLoading || teamsIsLoading || gameIsLoading) {
+  if (isLoading || gameIsLoading) {
     return <div>Loading questions</div>;
   }
 
@@ -57,7 +45,7 @@ export default function ManageQuestions() {
     return (
       <GameError
         title="No question selected? 🤔"
-        gameError={{
+        errorDetails={{
           message: `No question set in current game: ${JSON.stringify(game)}`,
         }}
       />

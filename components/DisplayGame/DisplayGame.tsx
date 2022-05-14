@@ -4,6 +4,7 @@ import styles from './DisplayGame.module.css';
 import GameError from '../GameError/GameError';
 import DisplayQuestion from './components/DisplayQuestion/DisplayQuestion';
 import { Game } from '@prisma/client';
+import DisplayTeamStatuses from './components/DisplayTeamStatuses/DisplayTeamStatuses';
 
 function Frame({ children }) {
   return (
@@ -23,7 +24,10 @@ export default function DisplayGame() {
   if (isError) {
     return (
       <Frame>
-        <GameError title="Error getting game status 💔" gameError={isError} />
+        <GameError
+          title="Error getting game status 💔"
+          errorDetails={isError}
+        />
       </Frame>
     );
   }
@@ -47,6 +51,7 @@ export default function DisplayGame() {
   return (
     <Frame>
       <DisplayQuestion questionId={game.questionId} />
+      <DisplayTeamStatuses />
     </Frame>
   );
 }

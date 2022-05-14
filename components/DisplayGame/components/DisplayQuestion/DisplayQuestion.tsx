@@ -16,7 +16,7 @@ export default function DisplayQuestion({ questionId }) {
 
   if (isError) {
     return (
-      <GameError title="Couldn't get current question" gameError={isError} />
+      <GameError title="Couldn't get current question" errorDetails={isError} />
     );
   }
 
@@ -29,14 +29,14 @@ export default function DisplayQuestion({ questionId }) {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.question}>{question.content}</h1>
-      <ul className={styles.answers}>
+      <div className={styles.answers}>
         {question.answers.map((answer: Answer, index: number) => (
-          <li className={styles.line} key={index}>
+          <div className={styles.line} key={index}>
             <span className={styles.number}>{index + 1}.</span>
             <DisplayAnswer answerId={answer.id} key={answer.id} />
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
       <Logo />
     </div>
   );

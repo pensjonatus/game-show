@@ -1,27 +1,16 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  justify-content: space-between;
+  gap: 1em;
   text-align: center;
-}
-
-.question {
-  flex: 1;
-  font-size: 6.5vh;
-}
-
-.answers {
-  font-size: 6vh;
-  list-style: none;
 }
 
 .line {
   display: flex;
-  align-items: flex-end;
   gap: 1rem;
 }
 
 .number {
-  font-size: 4vh;
   font-weight: 600;
 }

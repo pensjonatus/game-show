@@ -14,3 +14,23 @@
   justify-content: space-between;
   width: 100%;
 }
+
+.lostChances {
+  display: flex;
+  gap: 6px;
+}
+
+.restoreOne {
+  cursor: pointer;
+  padding: 0 1rem;
+  user-select: none;
+}
+
+.restoreOne:hover {
+  transform: scale(2);
+}
+
+.disabled {
+  background-color: gray;
+  cursor: default;
+}
