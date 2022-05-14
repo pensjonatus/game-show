@@ -9,16 +9,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
 }
 
 .name {
   font-size: 110%;
   font-weight: 600;
+  line-height: 1;
 }
 
 .score {
   color: var(--game-foreground);
   font-weight: 800;
   font-size: 200%;
+  line-height: 1;
+}
+
+.lostChances {
+  height: 1em;
 }
