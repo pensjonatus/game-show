@@ -1,10 +1,8 @@
 import prisma from '../../lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Game, Question, Team } from '@prisma/client';
+import { Answer, Game, Question, Team } from '@prisma/client';
 import commons from '../../lib/commons';
 import { BackendError } from '../../lib/types';
-
-async function createInitialGameState() {}
 
 async function startGame(
   gameState: Game,
@@ -69,6 +67,20 @@ async function stopGame(
         },
       });
     });
+
+    const answers: Answer[] = await prisma.answer.findMany();
+    answers.forEach(async (answer) => {
+      await prisma.answer.update({
+        where: {
+          id: answer.id
+        },
+        data: {
+          isRevealed: false,
+          pointesAreRevealed: false,
+        }
+      })
+    })
+
     const stoppedGame = await prisma.game.update({
       where: {
         id: gameState.id,

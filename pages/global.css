@@ -119,6 +119,7 @@ button:hover {
   background-color: lightgray;
   color: gray;
   border: 1px solid rgb(54, 54, 54);
+  cursor: default;
 }
 
 .disabledButton:hover {

@@ -16,6 +16,10 @@ export default function ManageQuestions() {
   const { isError: gameIsError, isLoading: gameIsLoading } = gameProps;
   const game: Game = gameProps.game;
 
+  if (!game || !game.inProgress) {
+    return null;
+  }
+
   if (isError) {
     return <Error title="Whoops! Cannot get questions" gameError={isError} />;
   }
