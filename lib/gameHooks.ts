@@ -1,5 +1,6 @@
 import useSWR, { SWRConfiguration } from 'swr';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const options: SWRConfiguration = { refreshInterval: 1000 };
 const fetcher = async (url) => await axios.get(url).then((res) => res.data);
@@ -44,4 +45,26 @@ export function useQuestion(questionId: string) {
 
 export function useAnswer(answerId: string) {
   return getData(`/api/answers/${answerId}`, 'answer');
+}
+
+export function useAudio(url) {
+  const [audio] = useState(new Audio(url));
+  const [playing, setPlaying] = useState(false);
+
+  function toggle() {
+    setPlaying(!playing);
+  }
+
+  useEffect(() => {
+    playing ? audio.play() : audio.pause();
+  }, [playing]);
+
+  useEffect(() => {
+    audio.addEventListener('ended', () => setPlaying(false));
+    return () => {
+      audio.removeEventListener('ended', () => setPlaying(false));
+    };
+  }, []);
+
+  return [playing, toggle] as const;
 }

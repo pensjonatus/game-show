@@ -40,7 +40,7 @@ export default function ManageAnswer({ answerId }) {
         const requestError = await result.json();
         setUpdateError(requestError);
       }
-      
+
       setProcessing(false);
     }
   }

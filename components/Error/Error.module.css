@@ -8,6 +8,7 @@
   padding: 1rem 3rem;
   border: 1px solid red;
   border-radius: 6px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 .title {
@@ -16,7 +17,8 @@
 }
 
 .errorDetails {
-  padding: 2rem;
+  padding: 1rem;
   border: 1px solid pink;
   background-color: lightgray;
+  border-radius: 6px;
 }

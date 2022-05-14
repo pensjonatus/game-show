@@ -7,10 +7,10 @@
 
 .question {
   flex: 1;
-  font-size: 3vw;
+  font-size: 6.5vh;
 }
 
 .answers {
-  font-size: 3vw;
+  font-size: 6vh;
   list-style: none;
 }

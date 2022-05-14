@@ -5,6 +5,14 @@ import Error from '../Error/Error';
 import CurrentQuestion from './components/CurrentQuestion/CurrentQuestion';
 import { Game } from '@prisma/client';
 
+function Frame({ children }) {
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.content}>{children}</div>
+    </div>
+  );
+}
+
 export default function GameInProgress() {
   const {
     game,
@@ -13,30 +21,32 @@ export default function GameInProgress() {
   }: { [x: string]: Game; isError: any; isLoading: any } = useGame();
 
   if (isError) {
-    return <Error title="Error getting game status 💔" gameError={isError} />;
+    return (
+      <Frame>
+        <Error title="Error getting game status 💔" gameError={isError} />
+      </Frame>
+    );
   }
 
   if (isLoading) {
-    return <div className={styles.wrapper}>Checking game status...</div>;
+    return <Frame>Checking game status...</Frame>;
   }
 
   if (!game.inProgress) {
     return (
-      <div className={styles.wrapper}>
+      <Frame>
         <h1>Waiting for {commons.gameTitle} to start 🕺</h1>
         <p>
           It's coming sooner than you think. That's right, it's{' '}
           {commons.gameTitle}
         </p>
-      </div>
+      </Frame>
     );
   }
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.content}>
-        <CurrentQuestion questionId={game.questionId} />
-      </div>
-    </div>
+    <Frame>
+      <CurrentQuestion questionId={game.questionId} />
+    </Frame>
   );
 }

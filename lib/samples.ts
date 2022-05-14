@@ -24,7 +24,7 @@ const samples: Sample = {
   ],
   questions: [
     {
-      question: 'What animal am I thinking of?',
+      question: 'An animal that is often on my mind',
       answers: [
         {
           answer: 'Dog',
@@ -49,7 +49,7 @@ const samples: Sample = {
       ],
     },
     {
-      question: 'Who is your real dad?',
+      question: 'A famous scary guy',
       answers: [
         {
           answer: 'Slenderman',
@@ -74,7 +74,7 @@ const samples: Sample = {
       ],
     },
     {
-      question: 'Why do people love technical writing?',
+      question: 'The reason people go into technical writing',
       answers: [
         {
           answer: 'Free coffee',
