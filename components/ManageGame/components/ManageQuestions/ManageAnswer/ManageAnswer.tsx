@@ -1,26 +1,40 @@
-import { Answer } from '@prisma/client';
+import { Answer, Team } from '@prisma/client';
 import clsx from 'clsx';
 import { useState } from 'react';
 import commons from '../../../../../lib/commons';
-import { useAnswer } from '../../../../../lib/gameHooks';
+import { useAnswer, useTeams } from '../../../../../lib/gameHooks';
 import Error from '../../../../Error/Error';
+import GivePointsToTeam from '../GivePointsToTeam/GivePointsToTeam';
 import styles from './ManageAnswer.module.css';
 
 export default function ManageAnswer({ answerId }) {
+  // Component hooks
   const [processing, setProcessing] = useState(false);
   const [updateError, setUpdateError] = useState(undefined);
+
+  // Database hooks
   const {
     answer,
     isLoading,
     isError,
   }: { [x: string]: Answer; isError: any; isLoading: any } =
     useAnswer(answerId);
+  const {
+    teams,
+    isLoading: teamsLoading,
+    isError: teamsError,
+  }: { [x: string]: Team[]; isLoading: any; isError: any } = useTeams();
 
+  // Returns in case of problems
   if (isError) {
     return <Error title="Couldn't get current error" gameError={isError} />;
   }
 
-  if (isLoading) {
+  if (teamsError) {
+    return <Error title="Cannot load teams ⛹️‍♀️" gameError={teamsError} />;
+  }
+
+  if (isLoading || teamsLoading) {
     return <div>loading answer</div>;
   }
 
@@ -46,7 +60,15 @@ export default function ManageAnswer({ answerId }) {
   }
 
   return (
-    <li className={styles.row}>
+    <span className={styles.row}>
+      <span>
+        <GivePointsToTeam
+          teamId={teams[0].id}
+          points={answer.points}
+          pointsAlreadyGiven={answer.pointsAlreadyGiven}
+          answerId={answer.id}
+        />
+      </span>
       <span className={styles.answer}>
         <button
           className={clsx(
@@ -62,10 +84,21 @@ export default function ManageAnswer({ answerId }) {
         <span>
           {answer.content} ({answer.points})
         </span>
+        <span title={JSON.stringify(answer)} style={{ cursor: 'pointer' }}>
+          🐱‍👤
+        </span>
         {updateError && (
           <Error title="Can't update answer" gameError={updateError} />
         )}
       </span>
-    </li>
+      <span>
+        <GivePointsToTeam
+          teamId={teams[1].id}
+          points={answer.points}
+          pointsAlreadyGiven={answer.pointsAlreadyGiven}
+          answerId={answerId}
+        />
+      </span>
+    </span>
   );
 }

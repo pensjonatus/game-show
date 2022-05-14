@@ -35,6 +35,10 @@ export function useTeams() {
   return getData('/api/teams', 'teams');
 }
 
+export function useTeam(teamId: string) {
+  return getData(`/api/teams/${teamId}`, 'team');
+}
+
 export function useQuestions() {
   return getData('/api/questions', 'questions');
 }

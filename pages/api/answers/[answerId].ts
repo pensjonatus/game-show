@@ -33,6 +33,19 @@ export default async function handler(
           res.json(toggleRevealed);
           break;
 
+        case commons.answerCommands.setPointsAlreadyGiven:
+          const value = req.body.value;
+          const valueSet = await prisma.answer.update({
+            where: {
+              id: answerId,
+            },
+            data: {
+              pointsAlreadyGiven: value,
+            },
+          });
+          res.json(valueSet);
+          break;
+
         default:
           break;
       }

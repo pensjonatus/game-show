@@ -22,7 +22,7 @@ model Answer {
   content            String
   points             Int
   isRevealed         Boolean  @default(false)
-  pointesAreRevealed Boolean  @default(false)
+  pointsAlreadyGiven Boolean  @default(false)
   questionId         String
   question           Question @relation(fields: [questionId], references: [id])
 }

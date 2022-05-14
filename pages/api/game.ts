@@ -72,14 +72,14 @@ async function stopGame(
     answers.forEach(async (answer) => {
       await prisma.answer.update({
         where: {
-          id: answer.id
+          id: answer.id,
         },
         data: {
           isRevealed: false,
-          pointesAreRevealed: false,
-        }
-      })
-    })
+          pointsAlreadyGiven: false,
+        },
+      });
+    });
 
     const stoppedGame = await prisma.game.update({
       where: {
