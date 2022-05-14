@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import commons from '../../../../../lib/commons';
 import { useTeam } from '../../../../../lib/gameHooks';
-import GameError from '../../../../Error/Error';
+import GameError from '../../../../GameError/GameError';
+import { setPointsAlreadyGiven } from '../lib/apiHelpers';
 
 export default function GivePointsToTeam({
   teamId,
@@ -40,19 +41,6 @@ export default function GivePointsToTeam({
     return result;
   }
 
-  async function setPointsAlreadyGiven() {
-    const result = await fetch(`/api/answers/${answerId}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        command: commons.answerCommands.setPointsAlreadyGiven,
-        value: true,
-      }),
-    });
-
-    return result;
-  }
-
   async function givePoints() {
     if (!pointsAlreadyGiven && !processing) {
       setProcessing(true);
@@ -61,7 +49,7 @@ export default function GivePointsToTeam({
         throw new Error('Cannot add points');
       }
 
-      const pointsUpdateResult = await setPointsAlreadyGiven();
+      const pointsUpdateResult = await setPointsAlreadyGiven(answerId);
       if (!pointsUpdateResult.ok) {
         throw new Error('Cannot change answer status');
       }

@@ -3,8 +3,9 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import commons from '../../../../../lib/commons';
 import { useAnswer, useTeams } from '../../../../../lib/gameHooks';
-import Error from '../../../../Error/Error';
+import GameError from '../../../../GameError/GameError';
 import GivePointsToTeam from '../GivePointsToTeam/GivePointsToTeam';
+import ShowPoints from '../ShowPoints/ShowPoints';
 import styles from './ManageAnswer.module.css';
 
 export default function ManageAnswer({ answerId }) {
@@ -27,11 +28,11 @@ export default function ManageAnswer({ answerId }) {
 
   // Returns in case of problems
   if (isError) {
-    return <Error title="Couldn't get current error" gameError={isError} />;
+    return <GameError title="Couldn't get current error" gameError={isError} />;
   }
 
   if (teamsError) {
-    return <Error title="Cannot load teams ⛹️‍♀️" gameError={teamsError} />;
+    return <GameError title="Cannot load teams ⛹️‍♀️" gameError={teamsError} />;
   }
 
   if (isLoading || teamsLoading) {
@@ -84,11 +85,8 @@ export default function ManageAnswer({ answerId }) {
         <span>
           {answer.content} ({answer.points})
         </span>
-        <span title={JSON.stringify(answer)} style={{ cursor: 'pointer' }}>
-          🐱‍👤
-        </span>
         {updateError && (
-          <Error title="Can't update answer" gameError={updateError} />
+          <GameError title="Can't update answer" gameError={updateError} />
         )}
       </span>
       <span>
@@ -99,6 +97,10 @@ export default function ManageAnswer({ answerId }) {
           answerId={answerId}
         />
       </span>
+      <ShowPoints
+        answerId={answer.id}
+        pointsAlreadyGiven={answer.pointsAlreadyGiven}
+      />
     </span>
   );
 }

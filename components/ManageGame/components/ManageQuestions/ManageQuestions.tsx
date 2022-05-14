@@ -2,7 +2,7 @@ import { useGame, useQuestions, useTeams } from '../../../../lib/gameHooks';
 import { Question, Game, Team, Answer } from '@prisma/client';
 import { QuestionWithAnswers } from '../../../../lib/types';
 import styles from './ManageQuestions.module.css';
-import Error from '../../../Error/Error';
+import GameError from '../../../GameError/GameError';
 import ManageAnswer from './ManageAnswer/ManageAnswer';
 
 export default function ManageQuestions() {
@@ -21,18 +21,20 @@ export default function ManageQuestions() {
   }
 
   if (isError) {
-    return <Error title="Whoops! Cannot get questions" gameError={isError} />;
+    return (
+      <GameError title="Whoops! Cannot get questions" gameError={isError} />
+    );
   }
 
   if (teamsIsError) {
     return (
-      <Error title="Yikes! Error getting teams" gameError={teamsIsError} />
+      <GameError title="Yikes! Error getting teams" gameError={teamsIsError} />
     );
   }
 
   if (gameIsError) {
     return (
-      <Error
+      <GameError
         title="Oh boy! Can't get the game to manage questions off of 😵"
         gameError={gameIsError}
       />
@@ -49,7 +51,7 @@ export default function ManageQuestions() {
 
   if (!currentQuestion) {
     return (
-      <Error
+      <GameError
         title="No question selected? 🤔"
         gameError={{
           message: `No question set in current game: ${JSON.stringify(game)}`,

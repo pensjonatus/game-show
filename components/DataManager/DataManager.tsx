@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import samples from '../../lib/samples';
-import Error from '../Error/Error';
+import GameError from '../GameError/GameError';
 
 export default function DataManager() {
   const [initializing, setInitializing] = useState(false);
@@ -37,7 +37,9 @@ export default function DataManager() {
       >
         Load data
       </button>
-      {error && <Error title="Cannot initialize data 😖" gameError={error} />}
+      {error && (
+        <GameError title="Cannot initialize data 😖" gameError={error} />
+      )}
     </>
   );
 }

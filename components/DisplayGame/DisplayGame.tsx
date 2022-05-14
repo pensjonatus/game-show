@@ -1,7 +1,7 @@
 import commons from '../../lib/commons';
 import { useGame } from '../../lib/gameHooks';
 import styles from './DisplayGame.module.css';
-import Error from '../Error/Error';
+import GameError from '../GameError/GameError';
 import DisplayQuestion from './components/DisplayQuestion/DisplayQuestion';
 import { Game } from '@prisma/client';
 
@@ -23,7 +23,7 @@ export default function DisplayGame() {
   if (isError) {
     return (
       <Frame>
-        <Error title="Error getting game status 💔" gameError={isError} />
+        <GameError title="Error getting game status 💔" gameError={isError} />
       </Frame>
     );
   }

@@ -1,13 +1,13 @@
 import { useQuestions } from '../../lib/gameHooks';
 import { Answer } from '@prisma/client';
 import { QuestionWithAnswers } from '../../lib/types';
-import Error from '../Error/Error';
+import GameError from '../GameError/GameError';
 
 export default function AllQuestions() {
   const { questions, isError, isLoading } = useQuestions();
 
   if (isError) {
-    return <Error gameError={isError} title="Cannot load questions" />;
+    return <GameError gameError={isError} title="Cannot load questions" />;
   }
 
   if (isLoading) {

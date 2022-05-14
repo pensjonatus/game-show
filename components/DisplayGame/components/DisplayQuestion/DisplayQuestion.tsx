@@ -1,7 +1,7 @@
 import { Answer } from '@prisma/client';
 import { useQuestion } from '../../../../lib/gameHooks';
 import { QuestionWithAnswers } from '../../../../lib/types';
-import Error from '../../../Error/Error';
+import GameError from '../../../GameError/GameError';
 import DisplayAnswer from '../DisplayAnswer/DisplayAnswer';
 import Logo from '../Logo/Logo';
 import styles from './DisplayQuestion.module.css';
@@ -15,7 +15,9 @@ export default function DisplayQuestion({ questionId }) {
     useQuestion(questionId);
 
   if (isError) {
-    return <Error title="Couldn't get current question" gameError={isError} />;
+    return (
+      <GameError title="Couldn't get current question" gameError={isError} />
+    );
   }
 
   if (isLoading) {

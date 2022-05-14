@@ -1,6 +1,6 @@
 import { Answer } from '@prisma/client';
 import { useAnswer, useAudio } from '../../../../lib/gameHooks';
-import Error from '../../../Error/Error';
+import GameError from '../../../GameError/GameError';
 import Mask from '../Mask/Mask';
 import AnswerOrMask from './AnswerOrMask';
 import styles from './DisplayAnswer.module.css';
@@ -16,7 +16,7 @@ export default function DisplayAnswer({ answerId }) {
     useAnswer(answerId);
 
   if (isError) {
-    return <Error title="Couldn't get current error" gameError={isError} />;
+    return <GameError title="Couldn't get current error" gameError={isError} />;
   }
 
   if (isLoading) {

@@ -1,7 +1,7 @@
 import { BackendError } from '../../lib/types';
-import styles from './Error.module.css';
+import styles from './GameError.module.css';
 
-export default function Error({
+export default function GameError({
   title,
   gameError,
 }: {

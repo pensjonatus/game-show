@@ -4,7 +4,7 @@ import { useState } from 'react';
 import commons from '../../../../lib/commons';
 import styles from './StartStop.module.css';
 import clsx from 'clsx';
-import Error from '../../../Error/Error';
+import GameError from '../../../GameError/GameError';
 
 export default function StartStop() {
   const [startButtonDisabled, setStartButtonDisabled] = useState(false);
@@ -15,7 +15,7 @@ export default function StartStop() {
 
   if (isError) {
     return (
-      <Error
+      <GameError
         title="Error setting up the start/stop buttons! 😒"
         gameError={isError}
       />
