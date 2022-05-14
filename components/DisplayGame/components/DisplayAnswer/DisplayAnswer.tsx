@@ -36,13 +36,13 @@ export default function DisplayAnswer({ answerId }) {
   const answerWidth = '30ch';
 
   return (
-    <li className={styles.row}>
+    <span className={styles.row}>
       <span style={{ width: answerWidth }}>
         {answer.isRevealed ? answer.content : <Mask width={answerWidth} />}
       </span>
       <span>
         {answer.pointesAreRevealed ? answer.points : <Mask width="4ch" />}
       </span>
-    </li>
+    </span>
   );
 }

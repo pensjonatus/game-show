@@ -28,8 +28,11 @@ export default function DisplayQuestion({ questionId }) {
     <div className={styles.wrapper}>
       <h1 className={styles.question}>{question.content}</h1>
       <ul className={styles.answers}>
-        {question.answers.map((answer: Answer) => (
-          <DisplayAnswer answerId={answer.id} key={answer.id} />
+        {question.answers.map((answer: Answer, index: number) => (
+          <li className={styles.line} key={index}>
+            <span className={styles.number}>{index + 1}.</span>
+            <DisplayAnswer answerId={answer.id} key={answer.id} />
+          </li>
         ))}
       </ul>
       <Logo />
