@@ -78,7 +78,9 @@ export default function GivePointsToTeam({
       )}
       onClick={givePoints}
     >
-      Give points to {team.name}
+      {pointsAlreadyGiven
+        ? 'Points already given'
+        : `Give points to ${team.name}`}
     </button>
   );
 }
