@@ -61,7 +61,7 @@ export default function ManageQuestions() {
   }
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <h3>{currentQuestion.content}</h3>
       <ul className={styles.answerList}>
         {currentQuestion.answers.map((answer: Answer) => (
