@@ -1,12 +1,12 @@
-import styles from './GameControls.module.css';
+import styles from './ManageGame.module.css';
 import StartStop from './components/StartStop/StartStop';
 import ManageQuestions from './components/ManageQuestions/ManageQuestions';
 
-export default function GameControls() {
+export default function ManageGame() {
   return (
     <section className={styles.gameControlPanel}>
       <StartStop />
-      <ManageQuestions/>
+      <ManageQuestions />
     </section>
   );
 }

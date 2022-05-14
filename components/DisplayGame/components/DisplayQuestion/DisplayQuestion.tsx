@@ -4,9 +4,9 @@ import { QuestionWithAnswers } from '../../../../lib/types';
 import Error from '../../../Error/Error';
 import DisplayAnswer from '../DisplayAnswer/DisplayAnswer';
 import Logo from '../Logo/Logo';
-import styles from './CurrentQuestion.module.css';
+import styles from './DisplayQuestion.module.css';
 
-export default function CurrentQuestion({ questionId }) {
+export default function DisplayQuestion({ questionId }) {
   const {
     question,
     isLoading,

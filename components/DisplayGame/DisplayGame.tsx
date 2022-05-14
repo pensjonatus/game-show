@@ -1,8 +1,8 @@
 import commons from '../../lib/commons';
 import { useGame } from '../../lib/gameHooks';
-import styles from './GameInProgress.module.css';
+import styles from './DisplayGame.module.css';
 import Error from '../Error/Error';
-import CurrentQuestion from './components/CurrentQuestion/CurrentQuestion';
+import DisplayQuestion from './components/DisplayQuestion/DisplayQuestion';
 import { Game } from '@prisma/client';
 
 function Frame({ children }) {
@@ -13,7 +13,7 @@ function Frame({ children }) {
   );
 }
 
-export default function GameInProgress() {
+export default function DisplayGame() {
   const {
     game,
     isError,
@@ -46,7 +46,7 @@ export default function GameInProgress() {
 
   return (
     <Frame>
-      <CurrentQuestion questionId={game.questionId} />
+      <DisplayQuestion questionId={game.questionId} />
     </Frame>
   );
 }

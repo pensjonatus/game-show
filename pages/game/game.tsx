@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import commons from '../../lib/commons';
-import GameInProgress from '../../components/GameInProgress/GameInProgress';
+import GameInProgress from '../../components/DisplayGame/DisplayGame';
 
 export default function Game() {
   return (
