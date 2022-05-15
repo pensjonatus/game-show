@@ -1,6 +1,8 @@
 import { Answer } from '@prisma/client';
 import { useQuestion } from '../../../../lib/gameHooks';
+import { calculatePoints } from '../../../../lib/helpers';
 import { QuestionWithAnswers } from '../../../../lib/types';
+import Badges from '../../../Badges/Badges';
 import GameError from '../../../GameError/GameError';
 import DisplayAnswer from '../DisplayAnswer/DisplayAnswer';
 import Logo from '../Logo/Logo';
@@ -28,6 +30,12 @@ export default function DisplayQuestion({ questionId }) {
 
   return (
     <div className={styles.wrapper}>
+      <Badges
+        badge="⭐"
+        howMany={calculatePoints(question.type, 1)}
+        playSound={false}
+        className={styles.stars}
+      />
       <h1 className={styles.question}>{question.content}</h1>
       <div className={styles.answers}>
         {question.answers.map((answer: Answer, index: number) => (

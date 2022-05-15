@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import { setPointsAlreadyGiven } from '../../../../../lib/apiHelpers';
+import { setPointsAlreadyGiven } from '../../../../../lib/helpers';
 
 export default function ShowPoints({ answerId, pointsAlreadyGiven }) {
   const [processing, setProcessing] = useState(false);

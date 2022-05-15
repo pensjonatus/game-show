@@ -5,7 +5,7 @@ import { Game } from '@prisma/client';
 import GameError from '../../GameError/GameError';
 import Button from './SelectQuestionButton';
 import styles from './PreviousNext.module.css';
-import { getShifted } from './lib/helpers';
+import { getShifted } from '../../../lib/helpers';
 
 export default function PreviousNext() {
   // component state

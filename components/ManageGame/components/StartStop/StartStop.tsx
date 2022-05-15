@@ -5,7 +5,7 @@ import commons from '../../../../lib/commons';
 import styles from './StartStop.module.css';
 import clsx from 'clsx';
 import GameError from '../../../GameError/GameError';
-import { postToEndpoint } from '../../../../lib/apiHelpers';
+import { postToEndpoint } from '../../../../lib/helpers';
 
 export default function StartStop() {
   const [startButtonDisabled, setStartButtonDisabled] = useState(false);

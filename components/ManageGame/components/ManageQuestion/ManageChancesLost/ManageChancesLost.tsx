@@ -2,11 +2,11 @@ import { Team } from '@prisma/client';
 import clsx from 'clsx';
 import { isResSent } from 'next/dist/shared/lib/utils';
 import { useState } from 'react';
-import { postToEndpoint } from '../../../../../lib/apiHelpers';
+import { postToEndpoint } from '../../../../../lib/helpers';
 import commons from '../../../../../lib/commons';
 import { useTeams } from '../../../../../lib/gameHooks';
 import GameError from '../../../../GameError/GameError';
-import LostChances from '../../../../LostChances/LostChances';
+import Badges from '../../../../Badges/Badges';
 import styles from './ManageChancesLost.module.css';
 
 export default function ManageChancesLost() {
@@ -69,7 +69,7 @@ export default function ManageChancesLost() {
       <div className={styles.row}>
         {teams.map((team: Team) => (
           <span className={styles.lostChances} key={team.id}>
-            <LostChances howMany={team.chancesLost} playSound={false} />
+            <Badges badge="😒" howMany={team.chancesLost} playSound={false} />
             {team.chancesLost > 0 && (
               <span
                 role="button"

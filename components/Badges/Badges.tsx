@@ -1,7 +1,12 @@
 import { useEffect } from 'react';
 import { useAudio } from '../../lib/gameHooks';
 
-export default function LostChances({ howMany, playSound }) {
+export default function Badges({
+  badge,
+  howMany,
+  playSound,
+  className = undefined,
+}) {
   const [playingWrong, toggleWrong] = useAudio('/resources/wrong.wav');
 
   useEffect(
@@ -13,10 +18,10 @@ export default function LostChances({ howMany, playSound }) {
     [howMany]
   );
   return (
-    <>
-      {[...new Array(howMany)].map((lostChance, key) => (
-        <span key={key}>😒</span>
+    <span className={className}>
+      {[...new Array(howMany)].map((nothing, key) => (
+        <span key={key}>{badge}</span>
       ))}
-    </>
+    </span>
   );
 }

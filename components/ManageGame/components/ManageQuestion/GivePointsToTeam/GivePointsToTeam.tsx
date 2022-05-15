@@ -7,7 +7,7 @@ import GameError from '../../../../GameError/GameError';
 import {
   postToEndpoint,
   setPointsAlreadyGiven,
-} from '../../../../../lib/apiHelpers';
+} from '../../../../../lib/helpers';
 
 export default function GivePointsToTeam({
   teamId,

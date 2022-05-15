@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import { postToEndpoint } from '../../lib/apiHelpers';
+import { postToEndpoint } from '../../lib/helpers';
 import samples from '../../lib/samples';
 import GameError from '../GameError/GameError';
 

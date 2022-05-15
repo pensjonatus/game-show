@@ -22,3 +22,8 @@
 .number {
   font-weight: 600;
 }
+
+.stars {
+  font-size: 1.6vw;
+  text-align: center;
+}
