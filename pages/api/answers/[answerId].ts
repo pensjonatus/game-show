@@ -41,6 +41,7 @@ export default async function handler(
             },
             data: {
               pointsAlreadyGiven: value,
+              isRevealed: value,
             },
           });
           res.json(valueSet);

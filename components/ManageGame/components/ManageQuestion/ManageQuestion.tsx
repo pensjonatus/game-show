@@ -9,7 +9,9 @@ import { useEffect, useState } from 'react';
 
 export default function ManageQuestions() {
   // component hooks
-  const [currentQuestion, setCurrentQuestion] = useState<QuestionWithAnswers | undefined>(undefined);
+  const [currentQuestion, setCurrentQuestion] = useState<
+    QuestionWithAnswers | undefined
+  >(undefined);
 
   // Game hooks
   const {
@@ -72,12 +74,17 @@ export default function ManageQuestions() {
 
   return (
     <div className={styles.wrapper}>
-      <h3>{currentQuestion.content} ({currentQuestion.type})</h3>
+      <h3>
+        {currentQuestion.content} ({currentQuestion.type})
+      </h3>
       <ManageChancesLost />
       <div className={styles.answerList}>
         {currentQuestion.answers.map((answer: Answer) => (
           <div key={answer.id} className={styles.answerRow}>
-            <ManageAnswer answerId={answer.id} />
+            <ManageAnswer
+              answerId={answer.id}
+              questionType={currentQuestion.type}
+            />
           </div>
         ))}
       </div>

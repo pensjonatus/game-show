@@ -1,4 +1,4 @@
-import { Answer, Team } from '@prisma/client';
+import { Answer, QuestionType, Team } from '@prisma/client';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { postToEndpoint } from '../../../../../lib/apiHelpers';
@@ -9,7 +9,7 @@ import GivePointsToTeam from '../GivePointsToTeam/GivePointsToTeam';
 import ShowPoints from '../ShowPoints/ShowPoints';
 import styles from './ManageAnswer.module.css';
 
-export default function ManageAnswer({ answerId }) {
+export default function ManageAnswer({ answerId, questionType }) {
   // Component hooks
   const [processing, setProcessing] = useState(false);
   const [updateError, setUpdateError] = useState(undefined);
@@ -59,13 +59,31 @@ export default function ManageAnswer({ answerId }) {
     }
   }
 
+  function calculatePoints(answer: Answer) {
+    switch (questionType) {
+      case QuestionType.SINGLE:
+        return answer.points;
+      case QuestionType.DOUBLE:
+        return answer.points * 2;
+      case QuestionType.TRIPLE:
+        return answer.points * 3;
+      case QuestionType.TUREFALSE:
+        return answer.points * 3;
+      case QuestionType.FINALE:
+        return answer.points;
+
+      default:
+        return answer.points;
+    }
+  }
+
   return (
     <span className={styles.row}>
       <span>
         {teams.length > 0 && (
           <GivePointsToTeam
             teamId={teams[0].id}
-            points={answer.points}
+            points={calculatePoints(answer)}
             pointsAlreadyGiven={answer.pointsAlreadyGiven}
             answerId={answer.id}
           />
@@ -94,7 +112,7 @@ export default function ManageAnswer({ answerId }) {
         {teams.length > 0 && (
           <GivePointsToTeam
             teamId={teams[1].id}
-            points={answer.points}
+            points={calculatePoints(answer)}
             pointsAlreadyGiven={answer.pointsAlreadyGiven}
             answerId={answerId}
           />

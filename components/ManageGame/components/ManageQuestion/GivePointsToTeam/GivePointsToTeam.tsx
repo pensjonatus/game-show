@@ -34,17 +34,17 @@ export default function GivePointsToTeam({
   async function givePoints() {
     if (!pointsAlreadyGiven && !processing) {
       setProcessing(true);
+      const pointsUpdateResult = await setPointsAlreadyGiven(answerId);
+      if (!pointsUpdateResult.ok) {
+        throw new Error('Cannot change answer status');
+      }
+
       const addPointsResult = await postToEndpoint(`/api/teams/${teamId}`, {
         command: commons.teamCommands.addPoints,
         amount: points,
       });
       if (!addPointsResult.ok) {
         throw new Error('Cannot add points');
-      }
-
-      const pointsUpdateResult = await setPointsAlreadyGiven(answerId);
-      if (!pointsUpdateResult.ok) {
-        throw new Error('Cannot change answer status');
       }
 
       setProcessing(false);
