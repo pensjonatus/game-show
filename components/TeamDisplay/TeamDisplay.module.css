@@ -32,5 +32,5 @@
 .score {
   font-size: xx-large;
   font-weight: 600;
-  color: var(--game-foreground);
+  color: var(---game-pink);
 }

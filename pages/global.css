@@ -32,7 +32,9 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
-  --game-foreground: rgb(253, 91, 118);
+  ---game-pink: #fd5b76;
+  --game-blue: #87cefa;
+  --game-yellow: #ffbe0a;
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
@@ -79,7 +81,7 @@ select {
 
 .button,
 button {
-  --accent-color: var(--game-foreground);
+  --accent-color: var(---game-pink);
   border: 1px solid var(--accent-color);
   padding: 0.5rem 1rem;
   border-radius: 3px;

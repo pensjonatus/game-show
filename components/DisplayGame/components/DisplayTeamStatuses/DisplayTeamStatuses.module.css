@@ -13,12 +13,13 @@
 
 .name {
   font-size: 110%;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1;
 }
 
 .score {
-  color: var(--game-foreground);
+  color: var(---game-pink);
+  text-shadow: 2px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
   font-weight: 800;
   font-size: 200%;
   line-height: 1;
