@@ -13,6 +13,7 @@ const samples: Sample = {
       avatarUrl:
         'https://upload.wikimedia.org/wikipedia/en/a/a3/Max_Pr%C3%BCss_-_Max_Pruss_Zeppelin_Navigator_Hindenburg.jpg',
       score: 0,
+      chancesLost: 0,
     },
     {
       id: '1',
@@ -20,6 +21,7 @@ const samples: Sample = {
       avatarUrl:
         'https://images-gmi-pmc.edge-generalmills.com/26983a17-0396-4b63-8caa-2286669e788b.jpg',
       score: 0,
+      chancesLost: 0,
     },
   ],
   questions: [
@@ -95,6 +97,23 @@ const samples: Sample = {
         {
           answer: 'Inherited the job',
           points: 1,
+        },
+      ],
+    },
+    {
+      question: 'An alternative to DITA',
+      answers: [
+        {
+          answer: 'Markdown',
+          points: 33,
+        },
+        {
+          answer: 'FrameMaker',
+          points: 34,
+        },
+        {
+          answer: 'Literally anything',
+          points: 11,
         },
       ],
     },
