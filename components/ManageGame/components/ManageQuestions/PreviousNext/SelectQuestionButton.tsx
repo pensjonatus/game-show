@@ -4,30 +4,27 @@ import { postToEndpoint } from '../../../../../lib/apiHelpers';
 import commons from '../../../../../lib/commons';
 import GameError from '../../../../GameError/GameError';
 
-export default function Button({ switchTo, children }) {
-  const [processing, setProcessing] = useState(false);
+export default function SelectQuestionButton({ question, children }) {
   const [error, setError] = useState(undefined);
 
   async function switchGameToQuestion() {
-    if (!processing && switchTo) {
-      setProcessing(true);
+    if (question) {
       const result = await postToEndpoint('/api/game', {
         command: commons.gameCommands.setQuestion,
-        questionId: switchTo.id,
+        questionId: question.id,
       });
 
       if (!result.ok) {
         const err = await result.json();
         setError(err);
       }
-      setProcessing(false);
     }
   }
 
   return (
     <>
       <button
-        className={clsx((!switchTo || processing) && 'disabledButton')}
+        className={clsx((!question) && 'disabledButton')}
         onClick={switchGameToQuestion}
       >
         {children}

@@ -62,12 +62,14 @@ export default function ManageAnswer({ answerId }) {
   return (
     <span className={styles.row}>
       <span>
-        <GivePointsToTeam
-          teamId={teams[0].id}
-          points={answer.points}
-          pointsAlreadyGiven={answer.pointsAlreadyGiven}
-          answerId={answer.id}
-        />
+        {teams.length > 0 && (
+          <GivePointsToTeam
+            teamId={teams[0].id}
+            points={answer.points}
+            pointsAlreadyGiven={answer.pointsAlreadyGiven}
+            answerId={answer.id}
+          />
+        )}
       </span>
       <span className={styles.answer}>
         <button
@@ -89,12 +91,14 @@ export default function ManageAnswer({ answerId }) {
         )}
       </span>
       <span>
-        <GivePointsToTeam
-          teamId={teams[1].id}
-          points={answer.points}
-          pointsAlreadyGiven={answer.pointsAlreadyGiven}
-          answerId={answerId}
-        />
+        {teams.length > 0 && (
+          <GivePointsToTeam
+            teamId={teams[1].id}
+            points={answer.points}
+            pointsAlreadyGiven={answer.pointsAlreadyGiven}
+            answerId={answerId}
+          />
+        )}
       </span>
       <ShowPoints
         answerId={answer.id}

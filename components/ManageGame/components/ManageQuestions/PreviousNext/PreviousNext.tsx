@@ -1,35 +1,51 @@
-import { useQuestions } from '../../../../../lib/gameHooks';
+import { useEffect, useState } from 'react';
+import { useGame, useQuestions } from '../../../../../lib/gameHooks';
 import { QuestionWithAnswers } from '../../../../../lib/types';
+import { Game } from '@prisma/client';
 import GameError from '../../../../GameError/GameError';
-import Button from './Button';
+import Button from './SelectQuestionButton';
 import styles from './PreviousNext.module.css';
+import { getShifted } from './lib/helpers';
 
-function getShiftedIndexOrUndefined(
-  currentItem: QuestionWithAnswers,
-  items: QuestionWithAnswers[],
-  shiftBy: number
-): QuestionWithAnswers | undefined {
-  const currentIndex = items.indexOf(currentItem);
-  const shiftedIndex = currentIndex + shiftBy;
+export default function PreviousNext() {
+  // component state
+  const [previousQuestion, setPreviousQuestion] = useState(undefined);
+  const [nextQuestion, setNextQuestion] = useState(undefined);
 
-  if (shiftedIndex < 0 || shiftedIndex > items.length) {
-    return undefined;
-  }
-
-  return items[shiftedIndex];
-}
-
-export default function PreviousNext({
-  currentQuestion,
-}: {
-  currentQuestion: QuestionWithAnswers;
-}) {
+  // game hooks
   const {
     questions,
     isError,
     isLoading,
   }: { [x: string]: QuestionWithAnswers[]; isError: any; isLoading: any } =
     useQuestions();
+  const {
+    game,
+    isError: gameError,
+    isLoading: gameLoading,
+  }: { [x: string]: Game; isError: any; isLoading: any } = useGame();
+
+  useEffect(
+    function () {
+      if (game && questions && questions.length > 0) {
+        const currentQuestion = questions.find(
+          (question) => question.id === game.questionId
+        );
+
+        if (currentQuestion) {
+          const current = questions.find(
+            (question: QuestionWithAnswers) =>
+              currentQuestion.id === question.id
+          );
+          const previous = getShifted(current, questions, -1);
+          const next = getShifted(current, questions, 1);
+          setPreviousQuestion(previous);
+          setNextQuestion(next);
+        }
+      }
+    },
+    [game, questions]
+  );
 
   if (isError) {
     return (
@@ -40,29 +56,18 @@ export default function PreviousNext({
     );
   }
 
-  if (isLoading) {
+  if (gameError) {
+    return <GameError title="Is the game on? 🤔" errorDetails={gameError} />;
+  }
+
+  if (isLoading || gameLoading) {
     return <div>Loading...</div>;
   }
 
-  const currentIndex = questions.find(
-    (question: QuestionWithAnswers) => currentQuestion.id === question.id
-  );
-
-  const previousQuestion: QuestionWithAnswers = getShiftedIndexOrUndefined(
-    currentIndex,
-    questions,
-    -1
-  );
-  const nextQuestion: QuestionWithAnswers = getShiftedIndexOrUndefined(
-    currentIndex,
-    questions,
-    1
-  );
-
   return (
     <div className={styles.wrapper}>
-      <Button switchTo={previousQuestion} key={0}>◀ Previous question</Button>
-      <Button switchTo={nextQuestion} key={1}>Next question ▶</Button>
+      <Button question={previousQuestion}>◀ Previous question</Button>
+      <Button question={nextQuestion}>Next question ▶</Button>
     </div>
   );
 }

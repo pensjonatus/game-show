@@ -56,16 +56,11 @@ async function stopGame(
   }
 
   try {
-    const teams: Team[] = await prisma.team.findMany();
-    teams.forEach(async (team) => {
-      await prisma.team.update({
-        where: {
-          id: team.id,
-        },
-        data: {
-          score: 0,
-        },
-      });
+    await prisma.team.updateMany({
+      data: {
+        score: 0,
+        chancesLost: 0,
+      },
     });
 
     const answers: Answer[] = await prisma.answer.findMany();
@@ -107,6 +102,7 @@ async function setQuestion(
   res: NextApiResponse
 ) {
   try {
+    const allResults = [];
     const result = await prisma.game.update({
       where: {
         id: gameId,
@@ -116,18 +112,24 @@ async function setQuestion(
       },
     });
     if (result.questionId === questionId) {
-      res.json(result);
+      allResults.push(result);
     } else {
       res
         .status(500)
         .json({ error: `Could not switch to question ID: ${questionId}` });
     }
+
+    const resetChances = await prisma.team.updateMany({
+      data: {
+        chancesLost: 0,
+      },
+    });
+    allResults.push(resetChances);
+    res.json(allResults);
   } catch (err) {
-    res
-      .status(500)
-      .json({
-        error: `Fatal error while trying to switch question: ${err.message}`,
-      });
+    res.status(500).json({
+      error: `Fatal error while trying to switch question: ${err.message}`,
+    });
   }
 }
 

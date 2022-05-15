@@ -5,9 +5,12 @@ import styles from './ManageQuestions.module.css';
 import GameError from '../../../GameError/GameError';
 import ManageAnswer from './ManageAnswer/ManageAnswer';
 import ManageChancesLost from './ManageChancesLost/ManageChancesLost';
-import PreviousNext from './PreviousNext/PreviousNext';
+import { useEffect, useState } from 'react';
 
 export default function ManageQuestions() {
+  // component hooks
+  const [currentQuestion, setCurrentQuestion] = useState(undefined);
+
   // Game hooks
   const {
     questions,
@@ -18,6 +21,19 @@ export default function ManageQuestions() {
   const gameProps = useGame();
   const { isError: gameIsError, isLoading: gameIsLoading } = gameProps;
   const game: Game = gameProps.game;
+
+  // component effects
+  useEffect(
+    function () {
+      if (questions && questions.length > 0 && game) {
+        const selectedQuestion: QuestionWithAnswers = questions.find(
+          (q: Question) => q.id === game.questionId
+        );
+        setCurrentQuestion(selectedQuestion);
+      }
+    },
+    [questions, game]
+  );
 
   // Optional renders
   if (!game || !game.inProgress) {
@@ -43,10 +59,6 @@ export default function ManageQuestions() {
     return <div>Loading questions</div>;
   }
 
-  const currentQuestion: QuestionWithAnswers = questions.find(
-    (q: Question) => q.id === game.questionId
-  );
-
   if (!currentQuestion) {
     return (
       <GameError
@@ -69,7 +81,6 @@ export default function ManageQuestions() {
           </div>
         ))}
       </div>
-      <PreviousNext currentQuestion={currentQuestion} />
     </div>
   );
 }

@@ -14,8 +14,8 @@ export default function LostChances({ howMany, playSound }) {
   );
   return (
     <>
-      {[...new Array(howMany)].map((lostChance) => (
-        <span key={lostChance}>😒</span>
+      {[...new Array(howMany)].map((lostChance, key) => (
+        <span key={key}>😒</span>
       ))}
     </>
   );
