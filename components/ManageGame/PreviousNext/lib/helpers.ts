@@ -1,4 +1,4 @@
-import { QuestionWithAnswers } from "../../../../../../lib/types";
+import { QuestionWithAnswers } from "../../../../lib/types";
 
 export function getShifted(
   currentItem: QuestionWithAnswers,

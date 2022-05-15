@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useGame, useQuestions } from '../../../../../lib/gameHooks';
-import { QuestionWithAnswers } from '../../../../../lib/types';
+import { useGame, useQuestions } from '../../../lib/gameHooks';
+import { QuestionWithAnswers } from '../../../lib/types';
 import { Game } from '@prisma/client';
-import GameError from '../../../../GameError/GameError';
+import GameError from '../../GameError/GameError';
 import Button from './SelectQuestionButton';
 import styles from './PreviousNext.module.css';
 import { getShifted } from './lib/helpers';
@@ -62,6 +62,10 @@ export default function PreviousNext() {
 
   if (isLoading || gameLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (!game.inProgress) {
+    return null;
   }
 
   return (

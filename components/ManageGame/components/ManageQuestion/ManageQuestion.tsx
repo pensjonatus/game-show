@@ -1,7 +1,7 @@
 import { useGame, useQuestions } from '../../../../lib/gameHooks';
 import { Question, Game, Answer } from '@prisma/client';
 import { QuestionWithAnswers } from '../../../../lib/types';
-import styles from './ManageQuestions.module.css';
+import styles from './ManageQuestion.module.css';
 import GameError from '../../../GameError/GameError';
 import ManageAnswer from './ManageAnswer/ManageAnswer';
 import ManageChancesLost from './ManageChancesLost/ManageChancesLost';
@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 
 export default function ManageQuestions() {
   // component hooks
-  const [currentQuestion, setCurrentQuestion] = useState(undefined);
+  const [currentQuestion, setCurrentQuestion] = useState<QuestionWithAnswers | undefined>(undefined);
 
   // Game hooks
   const {
@@ -72,7 +72,7 @@ export default function ManageQuestions() {
 
   return (
     <div className={styles.wrapper}>
-      <h3>{currentQuestion.content}</h3>
+      <h3>{currentQuestion.content} ({currentQuestion.type})</h3>
       <ManageChancesLost />
       <div className={styles.answerList}>
         {currentQuestion.answers.map((answer: Answer) => (

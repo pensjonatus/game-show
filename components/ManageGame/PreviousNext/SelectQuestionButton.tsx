@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import { postToEndpoint } from '../../../../../lib/apiHelpers';
-import commons from '../../../../../lib/commons';
-import GameError from '../../../../GameError/GameError';
+import { postToEndpoint } from '../../../lib/apiHelpers';
+import commons from '../../../lib/commons';
+import GameError from '../../GameError/GameError';
 
 export default function SelectQuestionButton({ question, children }) {
   const [error, setError] = useState(undefined);

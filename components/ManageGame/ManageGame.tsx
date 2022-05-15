@@ -1,7 +1,7 @@
 import styles from './ManageGame.module.css';
 import StartStop from './components/StartStop/StartStop';
-import ManageQuestions from './components/ManageQuestions/ManageQuestions';
-import PreviousNext from './components/ManageQuestions/PreviousNext/PreviousNext';
+import ManageQuestions from './components/ManageQuestion/ManageQuestion';
+import PreviousNext from './PreviousNext/PreviousNext';
 
 export default function ManageGame() {
   return (

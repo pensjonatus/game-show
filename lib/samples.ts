@@ -27,6 +27,7 @@ const samples: Sample = {
   questions: [
     {
       question: 'An animal that is often on my mind',
+      type: 'SINGLE',
       answers: [
         {
           answer: 'Dog',
@@ -52,6 +53,7 @@ const samples: Sample = {
     },
     {
       question: 'A famous scary guy',
+      type: 'DOUBLE',
       answers: [
         {
           answer: 'Slenderman',
@@ -77,6 +79,7 @@ const samples: Sample = {
     },
     {
       question: 'The reason people go into technical writing',
+      type: 'TRIPLE',
       answers: [
         {
           answer: 'Free coffee',
@@ -102,6 +105,7 @@ const samples: Sample = {
     },
     {
       question: 'An alternative to DITA',
+      type: 'TUREFALSE',
       answers: [
         {
           answer: 'Markdown',

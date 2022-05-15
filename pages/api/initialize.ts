@@ -50,7 +50,7 @@ export default async function handle(
         const createdQuestion: Question = await prisma.question.create({
           data: {
             content: question.question,
-            type: QuestionType.SINGLE,
+            type: question.type,
             answers: {
               createMany: {
                 data: question.answers.map((answer: AnswerPrototype) => ({
