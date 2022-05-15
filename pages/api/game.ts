@@ -101,6 +101,36 @@ async function stopGame(
   }
 }
 
+async function setQuestion(
+  gameId: string,
+  questionId: string,
+  res: NextApiResponse
+) {
+  try {
+    const result = await prisma.game.update({
+      where: {
+        id: gameId,
+      },
+      data: {
+        questionId: questionId,
+      },
+    });
+    if (result.questionId === questionId) {
+      res.json(result);
+    } else {
+      res
+        .status(500)
+        .json({ error: `Could not switch to question ID: ${questionId}` });
+    }
+  } catch (err) {
+    res
+      .status(500)
+      .json({
+        error: `Fatal error while trying to switch question: ${err.message}`,
+      });
+  }
+}
+
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse<BackendError | Game>
@@ -116,6 +146,10 @@ export default async function handle(
         break;
       case gameCommands.stop:
         await stopGame(gameState, res);
+        break;
+      case gameCommands.setQuestion:
+        const questionId = req.body.questionId;
+        await setQuestion(gameState.id, questionId, res);
         break;
 
       default:

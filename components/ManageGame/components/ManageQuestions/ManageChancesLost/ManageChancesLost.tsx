@@ -68,7 +68,7 @@ export default function ManageChancesLost() {
       </div>
       <div className={styles.row}>
         {teams.map((team: Team) => (
-          <span className={styles.lostChances}>
+          <span className={styles.lostChances} key={team.id}>
             <LostChances howMany={team.chancesLost} playSound={false} />
             {team.chancesLost > 0 && (
               <span

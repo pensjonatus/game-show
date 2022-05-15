@@ -5,10 +5,16 @@ import styles from './ManageQuestions.module.css';
 import GameError from '../../../GameError/GameError';
 import ManageAnswer from './ManageAnswer/ManageAnswer';
 import ManageChancesLost from './ManageChancesLost/ManageChancesLost';
+import PreviousNext from './PreviousNext/PreviousNext';
 
 export default function ManageQuestions() {
   // Game hooks
-  const { questions, isError, isLoading } = useQuestions();
+  const {
+    questions,
+    isError,
+    isLoading,
+  }: { [x: string]: QuestionWithAnswers[]; isError: any; isLoading: any } =
+    useQuestions();
   const gameProps = useGame();
   const { isError: gameIsError, isLoading: gameIsLoading } = gameProps;
   const game: Game = gameProps.game;
@@ -56,13 +62,14 @@ export default function ManageQuestions() {
     <div className={styles.wrapper}>
       <h3>{currentQuestion.content}</h3>
       <ManageChancesLost />
-      <ul className={styles.answerList}>
+      <div className={styles.answerList}>
         {currentQuestion.answers.map((answer: Answer) => (
-          <li key={answer.id} className={styles.answerRow}>
+          <div key={answer.id} className={styles.answerRow}>
             <ManageAnswer answerId={answer.id} />
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
+      <PreviousNext currentQuestion={currentQuestion} />
     </div>
   );
 }
