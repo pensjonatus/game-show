@@ -24,10 +24,13 @@ export default function DisplayFinale() {
     <div>
       <h1>Finale!</h1>
       <div className={styles.players}>
-        {[...new Array(2)].map(() => (
-          <div className={styles.playerPanel}>
+        {[...new Array(2)].map((nothing, key) => (
+          <div className={styles.playerPanel} key={key}>
             {questions.finale.map((question) => (
-              <DisplayFinaleQuestion questionId={question.id} />
+              <DisplayFinaleQuestion
+                questionId={question.id}
+                key={question.id}
+              />
             ))}
           </div>
         ))}
