@@ -15,6 +15,11 @@ export type QuestionWithAnswers = Question & {
   answers: Answer[];
 };
 
+export type AllQuestions = {
+  questionsAndAnswers: QuestionWithAnswers[];
+  finale: QuestionWithAnswers[];
+};
+
 export type BackendError = {
   message: string | null;
   response?: {

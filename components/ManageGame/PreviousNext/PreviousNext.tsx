@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useGame, useQuestions } from '../../../lib/gameHooks';
-import { QuestionWithAnswers } from '../../../lib/types';
+import { AllQuestions, QuestionWithAnswers } from '../../../lib/types';
 import { Game } from '@prisma/client';
 import GameError from '../../GameError/GameError';
 import Button from './SelectQuestionButton';
@@ -17,7 +17,7 @@ export default function PreviousNext() {
     questions,
     isError,
     isLoading,
-  }: { [x: string]: QuestionWithAnswers[]; isError: any; isLoading: any } =
+  }: { [x: string]: AllQuestions; isError: any; isLoading: any } =
     useQuestions();
   const {
     game,
@@ -27,18 +27,26 @@ export default function PreviousNext() {
 
   useEffect(
     function () {
-      if (game && questions && questions.length > 0) {
-        const currentQuestion = questions.find(
+      if (
+        game &&
+        questions?.questionsAndAnswers &&
+        questions.questionsAndAnswers.length > 0
+      ) {
+        const currentQuestion = questions.questionsAndAnswers.find(
           (question) => question.id === game.questionId
         );
 
         if (currentQuestion) {
-          const current = questions.find(
+          const current = questions.questionsAndAnswers.find(
             (question: QuestionWithAnswers) =>
               currentQuestion.id === question.id
           );
-          const previous = getShifted(current, questions, -1);
-          const next = getShifted(current, questions, 1);
+          const previous = getShifted(
+            current,
+            questions.questionsAndAnswers,
+            -1
+          );
+          const next = getShifted(current, questions.questionsAndAnswers, 1);
           setPreviousQuestion(previous);
           setNextQuestion(next);
         }

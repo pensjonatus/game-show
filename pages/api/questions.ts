@@ -1,6 +1,6 @@
 import prisma from '../../lib/prisma';
 import { QuestionWithAnswers } from '../../lib/types';
-import { Answer, Question } from '@prisma/client';
+import { Answer, Question, QuestionType } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handle(
@@ -11,15 +11,21 @@ export default async function handle(
     try {
       const questions: Question[] = await prisma.question.findMany();
       const answers: Answer[] = await prisma.answer.findMany();
+      const finale = [];
       const questionsAndAnswers: QuestionWithAnswers[] = questions.map(
         (question: Question) => {
           const matchingAnswers: Answer[] = answers.filter(
             (answer: Answer) => answer.questionId === question.id
           );
-          return { answers: matchingAnswers, ...question };
+
+          if (question.type === QuestionType.FINALE) {
+            finale.push({ answers: matchingAnswers, ...question });
+          } else {
+            return { answers: matchingAnswers, ...question };
+          }
         }
-      );
-      res.json(questionsAndAnswers);
+      ).filter(Boolean);
+      res.json({ questionsAndAnswers, finale });
     } catch (err) {
       res
         .status(500)

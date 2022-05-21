@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../components/Layout';
 import TwoTeams from '../components/TwoTeams/TwoTeams';
 import styles from './Home.module.css';
-import AllQuestions from '../components/AllQuestions/AllQuestions';
+import AllQuestions from '../components/PreviewAllQuestions/PreviewAllQuestions';
 import commons from '../lib/commons.js';
 import Head from 'next/head';
 import ManageGame from '../components/ManageGame/ManageGame';

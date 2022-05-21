@@ -1,0 +1,9 @@
+.answerShortlist {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.answerShortlist > span:not(:last-child)::after {
+  content: ',';
+}
