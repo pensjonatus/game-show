@@ -47,12 +47,7 @@ export default function DisplayQuestion({ questionId }) {
         />
       )}
       <h1 className={styles.question}>{question.content}</h1>
-      <div
-        className={clsx(
-          styles.answers,
-          question.answers.length > 5 && styles.answersSmall
-        )}
-      >
+      <div className={clsx(question.answers.length > 5 && styles.answersSmall)}>
         {question.answers.map((answer: Answer, index: number) => (
           <div className={styles.line} key={index}>
             <span className={styles.number}>{index + 1}.</span>
