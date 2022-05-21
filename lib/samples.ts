@@ -185,8 +185,8 @@ const samples: Sample = {
       ],
     },
     {
-      question: 'A DITA tag.',
-      type: QuestionType.SINGLE,
+      question: 'A DITA tag',
+      type: QuestionType.FINALE,
       answers: [
         { answer: 'p', points: 30 },
         { answer: 'parmname', points: 31 },
