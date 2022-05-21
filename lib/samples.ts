@@ -1,3 +1,4 @@
+import { QuestionType } from '@prisma/client';
 import { Sample } from './types';
 
 const samples: Sample = {
@@ -27,7 +28,7 @@ const samples: Sample = {
   questions: [
     {
       question: 'An animal that is often on my mind',
-      type: 'SINGLE',
+      type: QuestionType.SINGLE,
       answers: [
         {
           answer: 'Dog',
@@ -53,7 +54,7 @@ const samples: Sample = {
     },
     {
       question: 'A famous scary guy',
-      type: 'DOUBLE',
+      type: QuestionType.DOUBLE,
       answers: [
         {
           answer: 'Slenderman',
@@ -79,7 +80,7 @@ const samples: Sample = {
     },
     {
       question: 'The reason people go into technical writing',
-      type: 'TRIPLE',
+      type: QuestionType.TRIPLE,
       answers: [
         {
           answer: 'Free coffee',
@@ -105,7 +106,7 @@ const samples: Sample = {
     },
     {
       question: 'An alternative to DITA',
-      type: 'TUREFALSE',
+      type: QuestionType.TRUE_FALSE,
       answers: [
         {
           answer: 'Markdown',

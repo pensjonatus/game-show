@@ -10,6 +10,7 @@
     "generate-prisma-client": "prisma generate",
     "studio": "prisma studio",
     "push-db": "prisma db push",
+    "migrate": "prisma migrate dev",
     "format-model": "prisma format"
   },
   "keywords": [],

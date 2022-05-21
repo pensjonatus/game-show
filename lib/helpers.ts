@@ -25,7 +25,7 @@ export function calculatePoints(questionType: string, points: number) {
       return points * 2;
     case QuestionType.TRIPLE:
       return points * 3;
-    case QuestionType.TUREFALSE:
+    case QuestionType.TRUE_FALSE:
       return points * 3;
     case QuestionType.FINALE:
       return points;

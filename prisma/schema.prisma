@@ -32,7 +32,7 @@ enum QuestionType {
   SINGLE
   DOUBLE
   TRIPLE
-  TUREFALSE
+  TRUE_FALSE
   FINALE
 }
 
