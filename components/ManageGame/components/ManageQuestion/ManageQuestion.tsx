@@ -6,6 +6,7 @@ import GameError from '../../../GameError/GameError';
 import ManageAnswer from './ManageAnswer/ManageAnswer';
 import ManageChancesLost from './ManageChancesLost/ManageChancesLost';
 import { useEffect, useState } from 'react';
+import { sortAnswers } from '../../../../lib/helpers';
 
 export default function ManageQuestions() {
   // component hooks
@@ -71,6 +72,11 @@ export default function ManageQuestions() {
       />
     );
   }
+
+  currentQuestion.answers = sortAnswers(
+    currentQuestion.answers,
+    currentQuestion.type
+  );
 
   return (
     <div className={styles.wrapper}>

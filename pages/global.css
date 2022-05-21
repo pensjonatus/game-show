@@ -35,6 +35,8 @@ body {
   ---game-pink: #fd5b76;
   --game-blue: #87cefa;
   --game-yellow: #ffbe0a;
+  --shadow-small: 3px 3px 8px rgba(0, 0, 0, 0.2);
+  --shadow-medium: 6px 6px 12px rgba(0, 0, 0, 0.3);
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;

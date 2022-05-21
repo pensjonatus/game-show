@@ -27,99 +27,211 @@ const samples: Sample = {
   ],
   questions: [
     {
-      question: 'An animal that is often on my mind',
+      question: 'A tool for writing documentation',
       type: QuestionType.SINGLE,
       answers: [
         {
-          answer: 'Dog',
-          points: 50,
-        },
-        {
-          answer: 'Cat',
+          answer: 'Oxygen',
           points: 36,
         },
         {
-          answer: 'Pony',
-          points: 11,
+          answer: 'DITA',
+          points: 31,
         },
         {
-          answer: 'Chinchilla',
-          points: 10,
+          answer: 'Markdown',
+          points: 21,
         },
         {
-          answer: 'Cow',
+          answer: 'MS Word',
+          points: 14,
+        },
+        {
+          answer: 'RoboHelp',
           points: 1,
         },
       ],
     },
     {
-      question: 'A famous scary guy',
-      type: QuestionType.DOUBLE,
-      answers: [
-        {
-          answer: 'Slenderman',
-          points: 50,
-        },
-        {
-          answer: 'Guy from Back Rooms',
-          points: 36,
-        },
-        {
-          answer: 'Eddie Scissorhands',
-          points: 11,
-        },
-        {
-          answer: 'Beetle Juice',
-          points: 10,
-        },
-        {
-          answer: 'Jason',
-          points: 1,
-        },
-      ],
-    },
-    {
-      question: 'The reason people go into technical writing',
-      type: QuestionType.TRIPLE,
+      question: 'A reason for becoming a tech writer',
+      type: QuestionType.TRUE_FALSE,
       answers: [
         {
           answer: 'Free coffee',
-          points: 50,
-        },
-        {
-          answer: 'No time to think about real life',
-          points: 36,
+          points: 0,
         },
         {
           answer: 'Love writing',
           points: 11,
         },
         {
-          answer: 'Forced into it',
-          points: 10,
+          answer: 'Like desks',
+          points: 12,
         },
         {
-          answer: 'Inherited the job',
+          answer: 'Thomas Pynchon fan',
+          points: 0,
+        },
+        {
+          answer: 'Want to be a programmer',
           points: 1,
         },
       ],
     },
     {
-      question: 'An alternative to DITA',
+      question: 'A music genre for writing docs',
+      type: QuestionType.DOUBLE,
+      answers: [
+        {
+          answer: 'Dub step',
+          points: 30,
+        },
+        {
+          answer: 'Jazz',
+          points: 1,
+        },
+        { answer: 'Lo-fi beats', points: 26 },
+      ],
+    },
+    {
+      question: 'A popular word in technical documentation',
+      type: QuestionType.TRIPLE,
+      answers: [
+        {
+          answer: 'Upgrade',
+          points: 30,
+        },
+        {
+          answer: 'Install',
+          points: 13,
+        },
+        {
+          answer: 'Verify',
+          points: 0,
+        },
+      ],
+    },
+    {
+      question: 'A documentation output format',
       type: QuestionType.TRUE_FALSE,
       answers: [
         {
+          answer: 'PDF',
+          points: 98,
+        },
+        {
+          answer: 'CHM',
+          points: 32,
+        },
+        {
           answer: 'Markdown',
-          points: 33,
+          points: 0,
         },
         {
-          answer: 'FrameMaker',
-          points: 34,
+          answer: 'HTML',
+          points: 15,
         },
         {
-          answer: 'Literally anything',
-          points: 11,
+          answer: 'DITA',
+          points: 0,
         },
+        {
+          answer: 'troff',
+          points: 0,
+        },
+        {
+          answer: 'XML',
+          points: 0,
+        },
+        {
+          answer: 'webhelp',
+          points: 3,
+        },
+      ],
+    },
+    {
+      question: 'A common language error in documentation',
+      type: QuestionType.TRUE_FALSE,
+      answers: [
+        { answer: 'Oxford comma', points: 0 },
+        { answer: 'Hanging infinitive', points: 0 },
+        { answer: 'Split infinitive', points: 14 },
+        { answer: 'Passive voice', points: 23 },
+        { answer: 'Contractions', points: 7 },
+        { answer: 'Lowercase product name', points: 0 },
+        { answer: 'No verb', points: 0 },
+        { answer: 'Future tense', points: 27 },
+        { answer: 'Run-on sentence', points: 0 },
+      ],
+    },
+    {
+      question: 'An obstacle for delivering documentation on time',
+      type: QuestionType.FINALE,
+      answers: [
+        { answer: "SMEs don't respond", points: 30 },
+        { answer: 'Last-minute changes', points: 24 },
+        { answer: 'Too many changes', points: 19 },
+        { answer: 'Started too late', points: 7 },
+      ],
+    },
+    {
+      question: 'A style rule for writing documentation',
+      type: QuestionType.FINALE,
+      answers: [
+        { answer: 'No future', points: 26 },
+        { answer: 'No passive voice', points: 25 },
+        { answer: 'Short sentences', points: 22 },
+        { answer: 'Use "you"', points: 10 },
+      ],
+    },
+    {
+      question: 'A DITA tag.',
+      type: QuestionType.SINGLE,
+      answers: [
+        { answer: 'p', points: 30 },
+        { answer: 'parmname', points: 31 },
+        { answer: 'section', points: 14 },
+        { answer: 'example', points: 5 },
+      ],
+    },
+    {
+      question: 'A tool for generating static sites',
+      type: QuestionType.FINALE,
+      answers: [
+        { answer: 'Docusaurus', points: 99 },
+        { answer: 'Saurudocus', points: 1 },
+        { answer: 'Figmenstein', points: 2 },
+        { answer: 'Blobobo', points: 3 },
+      ],
+    },
+    {
+      question: 'A punctuation mark in English',
+      type: QuestionType.FINALE,
+      answers: [
+        { answer: 'full stop', points: 31 },
+        { answer: 'comma', points: 28 },
+        { answer: 'ampersand', points: 21 },
+        { answer: 'semi-colon', points: 18 },
+      ],
+    },
+    {
+      question: 'A programming language',
+      type: QuestionType.FINALE,
+      answers: [
+        { answer: 'Python', points: 55 },
+        { answer: 'JavaScript', points: 10 },
+        { answer: 'C++', points: 5 },
+        { answer: 'Java', points: 7 },
+      ],
+    },
+    {
+      question: 'A job title for a person who creates documentation',
+      type: QuestionType.FINALE,
+      answers: [
+        { answer: 'Technical writer', points: 30 },
+        { answer: 'Technical author', points: 24 },
+        { answer: 'Content creator', points: 23 },
+        { answer: 'Documentation engineer', points: 21 },
       ],
     },
   ],

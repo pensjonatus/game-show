@@ -1,4 +1,4 @@
-import { QuestionType } from '@prisma/client';
+import { Answer, QuestionType } from '@prisma/client';
 import commons from './commons';
 import { QuestionWithAnswers } from './types';
 
@@ -48,4 +48,21 @@ export function getShifted(
   }
 
   return items[shiftedIndex];
+}
+
+export function sortAnswers(answers: Answer[], questionType: QuestionType) {
+  const copyOfAnswers: Answer[] = JSON.parse(JSON.stringify(answers));
+  switch (questionType) {
+    case QuestionType.TRUE_FALSE:
+      copyOfAnswers.sort((a, b) => (a.content > b.content ? 1 : -1));
+      break;
+
+    default:
+      copyOfAnswers.sort((a: Answer, b: Answer) =>
+        a.points > b.points ? -1 : 1
+      );
+      break;
+  }
+
+  return copyOfAnswers;
 }

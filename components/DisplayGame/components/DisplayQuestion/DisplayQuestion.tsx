@@ -1,6 +1,6 @@
 import { Answer } from '@prisma/client';
 import { useQuestion } from '../../../../lib/gameHooks';
-import { calculatePoints } from '../../../../lib/helpers';
+import { calculatePoints, sortAnswers } from '../../../../lib/helpers';
 import { QuestionWithAnswers } from '../../../../lib/types';
 import Badges from '../../../Badges/Badges';
 import GameError from '../../../GameError/GameError';
@@ -25,8 +25,8 @@ export default function DisplayQuestion({ questionId }) {
   if (isLoading) {
     return <div>💕💕💕</div>;
   }
-
-  question.answers.sort((a, b) => (a.points > b.points ? -1 : 1));
+  
+  question.answers = sortAnswers(question.answers, question.type);
 
   return (
     <div className={styles.wrapper}>
