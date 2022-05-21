@@ -1,0 +1,8 @@
+.players {
+  display: flex;
+  gap: 3rem;
+}
+
+.playerPanel {
+    font-size: 1.1vw;
+}

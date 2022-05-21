@@ -1,6 +1,12 @@
 import useSWR, { SWRConfiguration } from 'swr';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { AllQuestions, BackendError, QuestionWithAnswers } from './types';
+
+type FetcherHandlers = {
+  isLoading: any;
+  isError: BackendError | undefined;
+};
 
 const options: SWRConfiguration = { refreshInterval: 1000 };
 const fetcher = async (url) => await axios.get(url).then((res) => res.data);
@@ -39,11 +45,19 @@ export function useTeam(teamId: string) {
   return getData(`/api/teams/${teamId}`, 'team');
 }
 
-export function useQuestions() {
+type UseQuestionsShape = FetcherHandlers & {
+  [x: string]: AllQuestions;
+};
+
+export function useQuestions(): UseQuestionsShape {
   return getData('/api/questions', 'questions');
 }
 
-export function useQuestion(questionId: string) {
+export type UseQuestionShape = FetcherHandlers & {
+  [x: string]: QuestionWithAnswers;
+};
+
+export function useQuestion(questionId: string): UseQuestionShape {
   return getData(`/api/questions/${questionId}`, 'question');
 }
 

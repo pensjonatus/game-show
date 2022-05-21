@@ -2,7 +2,6 @@ import { Answer, QuestionType } from '@prisma/client';
 import clsx from 'clsx';
 import { useQuestion } from '../../../../lib/gameHooks';
 import { calculatePoints, sortAnswers } from '../../../../lib/helpers';
-import { QuestionWithAnswers } from '../../../../lib/types';
 import Badges from '../../../Badges/Badges';
 import GameError from '../../../GameError/GameError';
 import DisplayAnswer from '../DisplayAnswer/DisplayAnswer';
@@ -14,7 +13,7 @@ export default function DisplayQuestion({ questionId }) {
     question,
     isLoading,
     isError,
-  }: { [x: string]: QuestionWithAnswers; isError: any; isLoading: any } =
+  } =
     useQuestion(questionId);
 
   if (isError) {

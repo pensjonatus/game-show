@@ -5,6 +5,8 @@ import PreviousNext from './PreviousNext/PreviousNext';
 import { useGame } from '../../lib/gameHooks';
 import { Game } from '@prisma/client';
 import GameError from '../GameError/GameError';
+import ToggleFinale from './components/ToggleFinale/ToggleFinale';
+import ManageFinale from './components/ManageFinale/ManageFinale';
 
 export default function ManageGame() {
   const gameProps = useGame();
@@ -27,8 +29,18 @@ export default function ManageGame() {
   return (
     <section className={styles.gameControlPanel}>
       <StartStop />
-      <ManageQuestion questionId={game.questionId} />
-      <PreviousNext />
+      {game.inProgress && (
+        <>
+          {!game.inFinale && (
+            <>
+              <ManageQuestion questionId={game.questionId} />
+              <PreviousNext />
+            </>
+          )}
+        </>
+      )}
+      {game.inProgress && <ToggleFinale />}
+      {game.inFinale && <ManageFinale />}
     </section>
   );
 }

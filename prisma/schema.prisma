@@ -37,16 +37,19 @@ enum QuestionType {
 }
 
 model Question {
-  id      String       @id @default(cuid())
-  content String
-  answers Answer[]
-  type    QuestionType
-  Game    Game[]
+  id           String       @id @default(cuid())
+  content      String
+  playerAnswer String?
+  scoreAwarded Int?         @default(0)
+  answers      Answer[]
+  type         QuestionType
+  Game         Game[]
 }
 
 model Game {
   id              String    @id @default(cuid())
   inProgress      Boolean   @default(false)
+  inFinale        Boolean   @default(false)
   currentQuestion Question? @relation(fields: [questionId], references: [id])
   questionId      String?
 }

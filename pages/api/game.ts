@@ -1,6 +1,6 @@
 import prisma from '../../lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Answer, Game, Question, Team } from '@prisma/client';
+import { Game, Question } from '@prisma/client';
 import commons from '../../lib/commons';
 import { BackendError } from '../../lib/types';
 
@@ -63,17 +63,18 @@ async function stopGame(
       },
     });
 
-    const answers: Answer[] = await prisma.answer.findMany();
-    answers.forEach(async (answer) => {
-      await prisma.answer.update({
-        where: {
-          id: answer.id,
-        },
-        data: {
-          isRevealed: false,
-          pointsAlreadyGiven: false,
-        },
-      });
+    await prisma.answer.updateMany({
+      data: {
+        isRevealed: false,
+        pointsAlreadyGiven: false,
+      },
+    });
+
+    await prisma.question.updateMany({
+      data: {
+        playerAnswer: undefined,
+        scoreAwarded: 0,
+      },
     });
 
     const stoppedGame = await prisma.game.update({
@@ -82,6 +83,7 @@ async function stopGame(
       },
       data: {
         inProgress: false,
+        inFinale: false,
         currentQuestion: undefined,
       },
     });
@@ -133,6 +135,32 @@ async function setQuestion(
   }
 }
 
+async function toggleFinale(gameState: Game, res: NextApiResponse) {
+  try {
+    const stateBefore = gameState.inFinale === true;
+    const result = await prisma.game.update({
+      where: {
+        id: gameState.id,
+      },
+      data: {
+        inFinale: !gameState.inFinale,
+      },
+    });
+
+    if (result.inFinale !== stateBefore) {
+      res.json(result);
+    } else {
+      res.status(500).json({
+        error: `Finale state not changed. Before: ${stateBefore}; After: ${result}`,
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      error: `Something went wrong when toggling finale: ${err.message}`,
+    });
+  }
+}
+
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse<BackendError | Game>
@@ -152,6 +180,9 @@ export default async function handle(
       case gameCommands.setQuestion:
         const questionId = req.body.questionId;
         await setQuestion(gameState.id, questionId, res);
+        break;
+      case gameCommands.toggleFinale:
+        await toggleFinale(gameState, res);
         break;
 
       default:

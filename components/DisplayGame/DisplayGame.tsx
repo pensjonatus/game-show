@@ -5,6 +5,7 @@ import GameError from '../GameError/GameError';
 import DisplayQuestion from './components/DisplayQuestion/DisplayQuestion';
 import { Game } from '@prisma/client';
 import DisplayTeamStatuses from './components/DisplayTeamStatuses/DisplayTeamStatuses';
+import DisplayFinale from './components/DisplayFinale/DisplayFinale';
 
 function Frame({ children }) {
   return (
@@ -50,8 +51,13 @@ export default function DisplayGame() {
 
   return (
     <Frame>
-      <DisplayQuestion questionId={game.questionId} />
-      <DisplayTeamStatuses />
+      {game.inFinale && <DisplayFinale />}
+      {!game.inFinale && (
+        <>
+          <DisplayQuestion questionId={game.questionId} />
+          <DisplayTeamStatuses />
+        </>
+      )}
     </Frame>
   );
 }
