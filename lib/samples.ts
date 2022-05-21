@@ -6,6 +6,7 @@ const samples: Sample = {
     id: '0',
     inProgress: false,
     questionId: undefined,
+    inFinale: false,
   },
   teams: [
     {
