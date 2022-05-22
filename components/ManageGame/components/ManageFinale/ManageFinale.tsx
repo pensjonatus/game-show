@@ -5,6 +5,8 @@ import ManageFinaleTeam from '../ManageFinaleTeam/ManageFinaleTeam';
 import ResetFinaleButton from './ResetFinaleButton';
 import styles from './ManageFinale.module.css';
 import { sortQuestions } from '../../../../lib/helpers';
+import ManageFinaleRound from '../ManageFinaleRound/ManageFinaleRound';
+import { useState } from 'react';
 
 export default function ManageFinale() {
   const { questions, isError, isLoading } = useQuestions();
@@ -31,6 +33,7 @@ export default function ManageFinale() {
         <ResetFinaleButton />
       </div>
       <ManageFinaleTeam />
+      <ManageFinaleRound />
       {questions.finale.map((question) => (
         <ManageFinaleAnswer questionId={question.id} key={question.id} />
       ))}

@@ -1,4 +1,4 @@
-import { Answer, Question } from '@prisma/client';
+import { Answer, Question, Round } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import commons from '../../../lib/commons';
 import prisma from '../../../lib/prisma';
@@ -7,22 +7,30 @@ import { QuestionWithAnswers } from '../../../lib/types';
 async function setPlayerAnswer(
   questionId: string,
   value: string,
+  round: Round,
   res: NextApiResponse
 ) {
+  const updateData =
+    round === Round.ROUND_ONE
+      ? { playerAnswerRoundOne: value }
+      : { playerAnswerRoundTwo: value };
   const update = await prisma.question.update({
     where: {
       id: questionId,
     },
-    data: {
-      playerAnswer: value,
-    },
+    data: updateData,
   });
 
-  if (update.playerAnswer === value) {
+  if (
+    update.playerAnswerRoundOne === value ||
+    update.playerAnswerRoundTwo === value
+  ) {
     res.json(update);
   } else {
     res.status(500).json({
-      message: `Did not update player answer. Expected: "${value}". Set to: ${update.playerAnswer}`,
+      message: `Did not update player answer. Expected: "${value}". Set to: ${JSON.stringify(
+        update
+      )}`,
     });
   }
 }
@@ -30,21 +38,29 @@ async function setPlayerAnswer(
 async function setScoreAwarded(
   questionId: string,
   value: number,
+  round: Round,
   res: NextApiResponse
 ) {
+  const updateData =
+    round === Round.ROUND_ONE
+      ? { scoreAwardedRoundOne: value }
+      : { scoreAwardedRoundTwo: value };
   try {
     const result = await prisma.question.update({
       where: {
         id: questionId,
       },
-      data: {
-        scoreAwarded: value,
-      },
+      data: updateData,
     });
 
-    if (result.scoreAwarded !== value) {
+    if (
+      result.scoreAwardedRoundOne !== value &&
+      result.scoreAwardedRoundTwo !== value
+    ) {
       res.status(500).json({
-        message: `Could not set scoreAwarded. Expected: ${value}. Actual: ${result.scoreAwarded}`,
+        message: `Could not set scoreAwarded. Expected: ${value}. Actual: ${JSON.stringify(
+          result
+        )}`,
       });
     } else {
       res.json(result);
@@ -64,14 +80,14 @@ export default async function handler(
 
   if (req.method === 'POST') {
     try {
-      const { command, value } = req.body;
+      const { command, value, round } = req.body;
 
       switch (command) {
         case commons.questionCommands.setPlayerAnswer:
-          await setPlayerAnswer(questionId, value, res);
+          await setPlayerAnswer(questionId, value, round, res);
           break;
         case commons.questionCommands.setScoreAwarded:
-          await setScoreAwarded(questionId, value, res);
+          await setScoreAwarded(questionId, value, round, res);
           break;
 
         default:

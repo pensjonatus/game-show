@@ -1,4 +1,4 @@
-import { Answer } from '@prisma/client';
+import { Answer, Round } from '@prisma/client';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import commons from '../../../../lib/commons';
@@ -8,6 +8,8 @@ import GameError from '../../../GameError/GameError';
 import styles from './ManageFinaleAnswer.module.css';
 
 export default function ManageFinaleAnswer({ questionId }) {
+  const [playerAnswer, setPlayerAnswer] = useState(undefined);
+  const [scoreAwarded, setScoreAwarded] = useState(undefined);
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [points, setPoints] = useState(0);
   const [updateErrorTitle, setUpdateErrorTitle] = useState(undefined);
@@ -17,11 +19,23 @@ export default function ManageFinaleAnswer({ questionId }) {
   const { question, isError, isLoading } = useQuestion(questionId);
   const { game, isError: gameError, isLoading: gameLoading } = useGame();
 
-  useEffect(function () {
-    if (question?.playerAnswer) {
-      setSelectedAnswer(question.playerAnswer);
-    }
-  }, [question]);
+  useEffect(
+    function () {
+      if (game && question) {
+        game?.finaleRound === Round.ROUND_ONE
+          ? setPlayerAnswer(question.playerAnswerRoundOne)
+          : setPlayerAnswer(question.playerAnswerRoundTwo);
+
+        game?.finaleRound === Round.ROUND_ONE
+          ? setScoreAwarded(question.scoreAwardedRoundOne)
+          : setScoreAwarded(question.scoreAwardedRoundTwo);
+        if (playerAnswer) {
+          setSelectedAnswer(playerAnswer);
+        }
+      }
+    },
+    [question, game]
+  );
 
   useEffect(
     function () {
@@ -64,20 +78,20 @@ export default function ManageFinaleAnswer({ questionId }) {
 
   async function addPoints() {
     try {
-      if (!processing && points > 0 && !question.scoreAwarded) {
+      if (!processing && points > 0 && !scoreAwarded) {
         setProcessing(true);
 
         const scoreUpdate = await postToEndpoint(
           `/api/questions/${question.id}`,
           {
             command: commons.questionCommands.setScoreAwarded,
+            round: game.finaleRound,
             value: points,
           }
         );
 
         if (!scoreUpdate.ok) {
           const err = await scoreUpdate.text();
-          console.log('Score update raw response', err);
           setUpdateErrorTitle('Cannot update score');
           setUpdateError(err);
         } else {
@@ -105,12 +119,13 @@ export default function ManageFinaleAnswer({ questionId }) {
     }
   }
 
-  async function setPlayerAnswer() {
-    if (!processing && selectedAnswer.length > 0 && !question.playerAnswer) {
+  async function updatePlayerAnswer() {
+    if (!processing && selectedAnswer.length > 0) {
       setProcessing(true);
 
       const response = await postToEndpoint(`/api/questions/${question.id}`, {
         command: commons.questionCommands.setPlayerAnswer,
+        round: game.finaleRound,
         value: selectedAnswer,
       });
 
@@ -145,18 +160,17 @@ export default function ManageFinaleAnswer({ questionId }) {
           className={clsx(
             (selectedAnswer.length === 0 ||
               processing ||
-              question.playerAnswer?.length > 0) &&
+              playerAnswer?.length > 0) &&
               'disabledButton'
           )}
-          onClick={setPlayerAnswer}
+          onClick={updatePlayerAnswer}
         >
           Show answer
         </button>
         <button
           onClick={addPoints}
           className={clsx(
-            (processing || points === 0 || question.scoreAwarded) &&
-              'disabledButton'
+            (processing || points === 0 || scoreAwarded) && 'disabledButton'
           )}
         >
           Give points ({points})

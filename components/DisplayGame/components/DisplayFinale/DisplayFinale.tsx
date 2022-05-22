@@ -1,8 +1,9 @@
-import { useQuestions } from '../../../../lib/gameHooks';
+import { useGame, useQuestions } from '../../../../lib/gameHooks';
 import { sortQuestions } from '../../../../lib/helpers';
 import GameError from '../../../GameError/GameError';
 import DisplayFinaleQuestion from './DisplayFinaleQuestion';
 import styles from './DisplayFinale.module.css';
+import { Round } from '@prisma/client';
 
 export default function DisplayFinale() {
   const { questions, isError, isLoading } = useQuestions();
@@ -26,16 +27,24 @@ export default function DisplayFinale() {
     <div>
       <h1 className={styles.header}>Finale!</h1>
       <div className={styles.players}>
-        {[...new Array(2)].map((nothing, key) => (
-          <div className={styles.playerPanel} key={key}>
-            {questions.finale.map((question) => (
-              <DisplayFinaleQuestion
-                questionId={question.id}
-                key={question.id}
-              />
-            ))}
-          </div>
-        ))}
+        <div className={styles.playerPanel}>
+          {questions.finale.map((question) => (
+            <DisplayFinaleQuestion
+              questionId={question.id}
+              key={question.id}
+              round={Round.ROUND_ONE}
+            />
+          ))}
+        </div>
+        <div className={styles.playerPanel}>
+          {questions.finale.map((question) => (
+            <DisplayFinaleQuestion
+              questionId={question.id}
+              key={question.id}
+              round={Round.ROUND_TWO}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { QuestionType } from '@prisma/client';
+import { QuestionType, Round } from '@prisma/client';
 import { Sample } from './types';
 
 const samples: Sample = {
@@ -9,6 +9,7 @@ const samples: Sample = {
     inFinale: false,
     finaleTeamId: undefined,
     finaleScore: 0,
+    finaleRound: Round.ROUND_ONE,
   },
   teams: [
     {

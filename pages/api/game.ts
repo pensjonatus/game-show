@@ -1,6 +1,6 @@
 import prisma from '../../lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Game, Question } from '@prisma/client';
+import { Game, Question, Round } from '@prisma/client';
 import commons from '../../lib/commons';
 import { BackendError } from '../../lib/types';
 
@@ -73,8 +73,10 @@ async function stopGame(
 
     await prisma.question.updateMany({
       data: {
-        playerAnswer: undefined,
-        scoreAwarded: 0,
+        playerAnswerRoundOne: null,
+        playerAnswerRoundTwo: null,
+        scoreAwardedRoundOne: null,
+        scoreAwardedRoundTwo: null,
       },
     });
 
@@ -198,8 +200,10 @@ async function resetFinale(gameId: string, res: NextApiResponse) {
 
     const resetQuestionsResult = await prisma.question.updateMany({
       data: {
-        playerAnswer: null,
-        scoreAwarded: 0,
+        playerAnswerRoundOne: null,
+        playerAnswerRoundTwo: null,
+        scoreAwardedRoundOne: null,
+        scoreAwardedRoundTwo: null,
       },
     });
     allResults.push(resetQuestionsResult);
@@ -219,6 +223,33 @@ async function resetFinale(gameId: string, res: NextApiResponse) {
     res.json(allResults);
   } catch (err) {
     res.status(500).json({ message: `Cannot reset game: ${err.message}` });
+  }
+}
+
+async function setFinaleRound(
+  gameId: string,
+  value: Round,
+  res: NextApiResponse
+) {
+  try {
+    const result = await prisma.game.update({
+      where: {
+        id: gameId,
+      },
+      data: {
+        finaleRound: value,
+      },
+    });
+
+    if (result.finaleRound === value) {
+      res.json(result);
+    } else {
+      res.status(500).json({
+        message: `Finale round not updated for some reason. Expected: ${value}. Actual: ${result.finaleRound}`,
+      });
+    }
+  } catch (err) {
+    res.status(500).json({ message: `Cannot set round: ${err.message}` });
   }
 }
 
@@ -251,6 +282,10 @@ export default async function handle(
         break;
       case gameCommands.resetFinale:
         await resetFinale(gameState.id, res);
+        break;
+      case gameCommands.setFinaleRound:
+        const { value } = req.body;
+        await setFinaleRound(gameState.id, value, res);
         break;
 
       default:

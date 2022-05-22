@@ -38,13 +38,20 @@ enum QuestionType {
 }
 
 model Question {
-  id           String       @id @default(cuid())
-  content      String
-  playerAnswer String?
-  scoreAwarded Int?         @default(0)
-  answers      Answer[]
-  type         QuestionType
-  Game         Game[]
+  id                   String       @id @default(cuid())
+  content              String
+  playerAnswerRoundOne String?
+  scoreAwardedRoundOne Int?         @default(0)
+  playerAnswerRoundTwo String?
+  scoreAwardedRoundTwo Int?         @default(0)
+  answers              Answer[]
+  type                 QuestionType
+  Game                 Game[]
+}
+
+enum Round {
+  ROUND_ONE
+  ROUND_TWO
 }
 
 model Game {
@@ -54,6 +61,7 @@ model Game {
   finaleTeam      Team?     @relation(fields: [finaleTeamId], references: [id])
   finaleTeamId    String?
   finaleScore     Int?      @default(0)
+  finaleRound     Round?    @default(value: ROUND_ONE)
   currentQuestion Question? @relation(fields: [questionId], references: [id])
   questionId      String?
 }
