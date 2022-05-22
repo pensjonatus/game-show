@@ -36,10 +36,19 @@ export default function DisplayGame() {
   if (!game.inProgress) {
     return (
       <Frame>
-        <h1>Waiting for {commons.gameTitle} to start 🕺</h1>
-        <p>
-          It's coming sooner than you think. That's right, it's{' '}
-          {commons.gameTitle}
+        <p>waiting for</p>
+        <h1
+          style={{
+            textAlign: 'center',
+            color: 'var(--game-yellow)',
+            fontSize: '2.5em',
+          }}
+        >
+          {commons.gameTitle} 🕺
+        </h1>
+        <p>It's coming sooner than you think.</p>
+        <p style={{ textAlign: 'center', fontSize: '2em' }}>
+          That's right, it's {commons.gameTitle}
         </p>
       </Frame>
     );
