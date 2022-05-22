@@ -27,11 +27,15 @@ export default function DisplayAnswer({ answerId }) {
 
   return (
     <span className={styles.row}>
-      <AnswerOrMask content={answer.content} isRevealed={answer.isRevealed} />
-      <PointsOrMask
-        pointsAlreadyGiven={answer.pointsAlreadyGiven}
-        points={answer.points}
-      />
+      <span style={{ width: '30ch' }}>
+        <AnswerOrMask content={answer.content} isRevealed={answer.isRevealed} />
+      </span>
+      <span style={{ width: '4ch' }}>
+        <PointsOrMask
+          isRevealed={answer.pointsAlreadyGiven}
+          points={answer.points}
+        />
+      </span>
     </span>
   );
 }

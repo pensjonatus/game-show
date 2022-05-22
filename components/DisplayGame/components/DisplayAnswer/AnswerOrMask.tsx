@@ -14,7 +14,7 @@ export default function AnswerOrMask({ isRevealed, content }) {
     [isRevealed]
   );
 
-  const answerWidth = '30ch';
+  const answerWidth = '100%';
   return (
     <span style={{ width: answerWidth }}>
       {isRevealed ? content : <Mask width={answerWidth} />}

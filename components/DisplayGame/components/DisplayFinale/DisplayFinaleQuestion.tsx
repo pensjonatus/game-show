@@ -4,6 +4,8 @@ import Mask from '../Mask/Mask';
 import styles from '../DisplayFinale/DisplayFinale.module.css';
 import { useEffect, useState } from 'react';
 import { Round } from '@prisma/client';
+import AnswerOrMask from '../DisplayAnswer/AnswerOrMask';
+import PointsOrMask from '../DisplayAnswer/PointsOrMask';
 
 export default function DisplayFinaleQuestion({
   questionId,
@@ -42,10 +44,16 @@ export default function DisplayFinaleQuestion({
   return (
     <div className={styles.row}>
       <div className={styles.answer}>
-        {(playerAnswer && isActiveRound) ? <span>{playerAnswer}</span> : <Mask width="100%" />}
+        <AnswerOrMask
+          content={playerAnswer}
+          isRevealed={playerAnswer && isActiveRound}
+        />
       </div>
       <div className={styles.score}>
-        {(scoreAwarded > 0 && isActiveRound) ? <span>{scoreAwarded}</span> : <Mask width="100%" />}
+        <PointsOrMask
+          isRevealed={scoreAwarded > 0 && isActiveRound}
+          points={scoreAwarded}
+        />
       </div>
     </div>
   );
