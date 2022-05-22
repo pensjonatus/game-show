@@ -2,6 +2,7 @@ import useSWR, { SWRConfiguration } from 'swr';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { AllQuestions, BackendError, QuestionWithAnswers } from './types';
+import { Game, Team } from '@prisma/client';
 
 type FetcherHandlers = {
   isLoading: any;
@@ -33,11 +34,19 @@ function getData(endpoint: string, dataFieldName: string) {
   }
 }
 
-export function useGame() {
+type UseGameShape = FetcherHandlers & {
+  [x: string]: Game;
+};
+
+export function useGame(): UseGameShape {
   return getData('/api/game/', 'game');
 }
 
-export function useTeams() {
+type UseTeamsShape = FetcherHandlers & {
+  [x: string]: Team[];
+};
+
+export function useTeams(): UseTeamsShape {
   return getData('/api/teams', 'teams');
 }
 
@@ -53,7 +62,7 @@ export function useQuestions(): UseQuestionsShape {
   return getData('/api/questions', 'questions');
 }
 
-export type UseQuestionShape = FetcherHandlers & {
+type UseQuestionShape = FetcherHandlers & {
   [x: string]: QuestionWithAnswers;
 };
 

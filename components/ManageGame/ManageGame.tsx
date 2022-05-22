@@ -3,15 +3,12 @@ import StartStop from './components/StartStop/StartStop';
 import ManageQuestion from './components/ManageQuestion/ManageQuestion';
 import PreviousNext from './PreviousNext/PreviousNext';
 import { useGame } from '../../lib/gameHooks';
-import { Game } from '@prisma/client';
 import GameError from '../GameError/GameError';
 import ToggleFinale from './components/ToggleFinale/ToggleFinale';
 import ManageFinale from './components/ManageFinale/ManageFinale';
 
 export default function ManageGame() {
-  const gameProps = useGame();
-  const { isError: gameIsError, isLoading: gameIsLoading } = gameProps;
-  const game: Game = gameProps.game;
+  const { game, isError: gameIsError, isLoading: gameIsLoading } = useGame();
 
   if (gameIsError) {
     return (

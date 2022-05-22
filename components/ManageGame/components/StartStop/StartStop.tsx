@@ -10,9 +10,7 @@ import { postToEndpoint } from '../../../../lib/helpers';
 export default function StartStop() {
   const [startButtonDisabled, setStartButtonDisabled] = useState(false);
   const [errorTogglingGame, setErrorTogglingGame] = useState(undefined);
-  const gameProps = useGame();
-  const game: Game = gameProps.game;
-  const { isError, isLoading } = gameProps;
+  const { game, isError, isLoading } = useGame();
 
   if (isError) {
     return (

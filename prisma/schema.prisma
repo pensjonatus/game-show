@@ -16,6 +16,7 @@ model Team {
   avatarUrl   String?
   score       Int     @default(0)
   chancesLost Int     @default(0)
+  Game        Game[]
 }
 
 model Answer {
@@ -50,6 +51,8 @@ model Game {
   id              String    @id @default(cuid())
   inProgress      Boolean   @default(false)
   inFinale        Boolean   @default(false)
+  finaleTeam      Team?     @relation(fields: [finaleTeamId], references: [id])
+  finaleTeamId    String?
   currentQuestion Question? @relation(fields: [questionId], references: [id])
   questionId      String?
 }

@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  font-size: 2vw;
+}
+
+.waitingForTeam {
+  border: 1px solid red;
+}
+
+.waitingForTeam::before {
+  content: 'Select the team in finale!';
+  font-size: 0.8em;
+  color: red;
+}
+
+.processing {
+    background-color: lightgray;
+    cursor: progress;
+}
+
+.radioButton {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.radioButton input {
+  height: 2em;
+}

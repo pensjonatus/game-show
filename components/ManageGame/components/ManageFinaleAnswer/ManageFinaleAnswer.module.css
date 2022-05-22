@@ -2,6 +2,22 @@
   padding: 1rem 0;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 1rem 0;
+}
+
+.textBoxWrapper {
+  display: flex;
+  gap: 0.5em;
+}
+
+.textBox {
+  padding: 0.5em 1em;
+}
+
 .buttons {
   display: flex;
   flex-wrap: wrap;

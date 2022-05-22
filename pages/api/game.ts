@@ -161,6 +161,35 @@ async function toggleFinale(gameState: Game, res: NextApiResponse) {
   }
 }
 
+async function setFinaleTeam(
+  gameState: Game,
+  teamId: string,
+  res: NextApiResponse
+) {
+  try {
+    const result = await prisma.game.update({
+      where: {
+        id: gameState.id,
+      },
+      data: {
+        finaleTeamId: teamId,
+      },
+    });
+
+    if (result.finaleTeamId === teamId) {
+      res.json(result);
+    } else {
+      res.status(500).json({
+        error: `Did not set finale team to ${teamId}`,
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      error: `Something went wrong when setting team: ${err.message}`,
+    });
+  }
+}
+
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse<BackendError | Game>
@@ -183,6 +212,10 @@ export default async function handle(
         break;
       case gameCommands.toggleFinale:
         await toggleFinale(gameState, res);
+        break;
+      case gameCommands.setFinaleTeam:
+        const teamId = req.body.value;
+        await setFinaleTeam(gameState, teamId, res);
         break;
 
       default:

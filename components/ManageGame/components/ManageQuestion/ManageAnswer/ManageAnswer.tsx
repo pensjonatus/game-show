@@ -25,7 +25,7 @@ export default function ManageAnswer({ answerId, questionType }) {
     teams,
     isLoading: teamsLoading,
     isError: teamsError,
-  }: { [x: string]: Team[]; isLoading: any; isError: any } = useTeams();
+  } = useTeams();
 
   // Returns in case of problems
   if (isError) {

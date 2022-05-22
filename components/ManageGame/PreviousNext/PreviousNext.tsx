@@ -13,17 +13,8 @@ export default function PreviousNext() {
   const [nextQuestion, setNextQuestion] = useState(undefined);
 
   // game hooks
-  const {
-    questions,
-    isError,
-    isLoading,
-  }: { [x: string]: AllQuestions; isError: any; isLoading: any } =
-    useQuestions();
-  const {
-    game,
-    isError: gameError,
-    isLoading: gameLoading,
-  }: { [x: string]: Game; isError: any; isLoading: any } = useGame();
+  const { questions, isError, isLoading } = useQuestions();
+  const { game, isError: gameError, isLoading: gameLoading } = useGame();
 
   useEffect(
     function () {

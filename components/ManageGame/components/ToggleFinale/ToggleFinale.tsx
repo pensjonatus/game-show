@@ -7,11 +7,7 @@ import GameError from '../../../GameError/GameError';
 
 export default function ToggleFinale() {
   const [buttonError, setButtonError] = useState(undefined);
-  const {
-    game,
-    isError,
-    isLoading,
-  }: { [x: string]: Game; isError: any; isLoading: any } = useGame();
+  const { game, isError, isLoading } = useGame();
 
   if (isError) {
     return <GameError title="Is it a finale or not?" errorDetails={isError} />;
@@ -37,7 +33,12 @@ export default function ToggleFinale() {
       <button className="button bigButton" onClick={handleToggleFinale}>
         {game.inFinale ? 'Back to questions' : 'Play finale'}
       </button>
-      {buttonError && <GameError title="Problem switching to finale" errorDetails={buttonError} />}
+      {buttonError && (
+        <GameError
+          title="Problem switching to finale"
+          errorDetails={buttonError}
+        />
+      )}
     </>
   );
 }

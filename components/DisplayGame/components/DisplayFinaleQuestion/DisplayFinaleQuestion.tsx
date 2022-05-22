@@ -1,10 +1,10 @@
-import { useQuestion, UseQuestionShape } from '../../../../lib/gameHooks';
+import { useQuestion } from '../../../../lib/gameHooks';
 import GameError from '../../../GameError/GameError';
 import Mask from '../Mask/Mask';
 import styles from './DisplayFinaleQuestion.module.css';
 
 export default function DisplayFinaleQuestion({ questionId }) {
-  const { question, isError, isLoading }: UseQuestionShape =
+  const { question, isError, isLoading } =
     useQuestion(questionId);
 
   if (isLoading) {
@@ -20,12 +20,12 @@ export default function DisplayFinaleQuestion({ questionId }) {
       {question.playerAnswer ? (
         <span>{question.playerAnswer}</span>
       ) : (
-        <Mask width="6em" />
+        <Mask width="6ch" />
       )}
       {question.scoreAwarded > 0 ? (
         <span>{question.scoreAwarded}</span>
       ) : (
-        <Mask width="2em" />
+        <Mask width="2ch" />
       )}
     </div>
   );

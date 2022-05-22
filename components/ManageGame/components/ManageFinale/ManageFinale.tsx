@@ -1,15 +1,11 @@
-import { useQuestions } from '../../../../lib/gameHooks';
+import { useQuestions, useTeams } from '../../../../lib/gameHooks';
 import { AllQuestions } from '../../../../lib/types';
 import GameError from '../../../GameError/GameError';
 import ManageFinaleAnswer from '../ManageFinaleAnswer/ManageFinaleAnswer';
+import ManageFinaleTeam from '../ManageFinaleTeam/ManageFinaleTeam';
 
 export default function ManageFinale() {
-  const {
-    questions,
-    isError,
-    isLoading,
-  }: { [x: string]: AllQuestions; isError: any; isLoading: any } =
-    useQuestions();
+  const { questions, isError, isLoading } = useQuestions();
 
   if (isError) {
     return (
@@ -27,6 +23,7 @@ export default function ManageFinale() {
   return (
     <div>
       <h2>Finale!</h2>
+      <ManageFinaleTeam/>
       {questions.finale.map((question) => (
         <ManageFinaleAnswer questionId={question.id} key={question.id} />
       ))}

@@ -16,11 +16,7 @@ function Frame({ children }) {
 }
 
 export default function DisplayGame() {
-  const {
-    game,
-    isError,
-    isLoading,
-  }: { [x: string]: Game; isError: any; isLoading: any } = useGame();
+  const { game, isError, isLoading } = useGame();
 
   if (isError) {
     return (
