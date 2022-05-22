@@ -17,6 +17,12 @@ export default function ManageFinaleAnswer({ questionId }) {
   const { question, isError, isLoading } = useQuestion(questionId);
   const { game, isError: gameError, isLoading: gameLoading } = useGame();
 
+  useEffect(function () {
+    if (question?.playerAnswer) {
+      setSelectedAnswer(question.playerAnswer);
+    }
+  }, [question]);
+
   useEffect(
     function () {
       if (question?.answers) {
@@ -58,7 +64,7 @@ export default function ManageFinaleAnswer({ questionId }) {
 
   async function addPoints() {
     try {
-      if (!processing && points > 0) {
+      if (!processing && points > 0 && !question.scoreAwarded) {
         setProcessing(true);
 
         const scoreUpdate = await postToEndpoint(
@@ -100,7 +106,7 @@ export default function ManageFinaleAnswer({ questionId }) {
   }
 
   async function setPlayerAnswer() {
-    if (!processing && selectedAnswer.length > 0) {
+    if (!processing && selectedAnswer.length > 0 && !question.playerAnswer) {
       setProcessing(true);
 
       const response = await postToEndpoint(`/api/questions/${question.id}`, {
@@ -136,14 +142,22 @@ export default function ManageFinaleAnswer({ questionId }) {
           </button>
         </span>
         <button
-          className={clsx((points === 0 || processing) && 'disabledButton')}
+          className={clsx(
+            (selectedAnswer.length === 0 ||
+              processing ||
+              question.playerAnswer?.length > 0) &&
+              'disabledButton'
+          )}
           onClick={setPlayerAnswer}
         >
           Show answer
         </button>
         <button
           onClick={addPoints}
-          className={clsx((processing || points === 0) && 'disabledButton')}
+          className={clsx(
+            (processing || points === 0 || question.scoreAwarded) &&
+              'disabledButton'
+          )}
         >
           Give points ({points})
         </button>

@@ -1,8 +1,40 @@
+.header {
+  text-align: center;
+}
+
 .players {
   display: flex;
   gap: 3rem;
+  text-transform: none;
 }
 
 .playerPanel {
     font-size: 2.5vw;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.playerPanel + .playerPanel .row {
+  flex-direction: row-reverse;
+}
+
+.answer {
+  width: 20ch;
+}
+
+.playerPanel + .playerPanel .answer {
+  text-align: right;
+}
+
+.score {
+  width: 3ch;
+  text-align: right;
+}
+
+.playerPanel + .playerPanel .score {
+  text-align: left;
 }

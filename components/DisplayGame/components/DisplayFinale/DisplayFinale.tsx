@@ -1,8 +1,7 @@
 import { useQuestions } from '../../../../lib/gameHooks';
 import { sortQuestions } from '../../../../lib/helpers';
-import { AllQuestions } from '../../../../lib/types';
 import GameError from '../../../GameError/GameError';
-import DisplayFinaleQuestion from '../DisplayFinaleQuestion/DisplayFinaleQuestion';
+import DisplayFinaleQuestion from './DisplayFinaleQuestion';
 import styles from './DisplayFinale.module.css';
 
 export default function DisplayFinale() {
@@ -25,7 +24,7 @@ export default function DisplayFinale() {
 
   return (
     <div>
-      <h1>Finale!</h1>
+      <h1 className={styles.header}>Finale!</h1>
       <div className={styles.players}>
         {[...new Array(2)].map((nothing, key) => (
           <div className={styles.playerPanel} key={key}>
