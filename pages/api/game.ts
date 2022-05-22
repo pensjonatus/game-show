@@ -88,7 +88,6 @@ async function stopGame(
         inProgress: false,
         inFinale: false,
         currentQuestion: undefined,
-        finaleScore: 0,
       },
     });
 
@@ -213,7 +212,6 @@ async function resetFinale(gameId: string, res: NextApiResponse) {
         id: gameId,
       },
       data: {
-        finaleScore: 0,
         finaleTeamId: null,
       },
     });

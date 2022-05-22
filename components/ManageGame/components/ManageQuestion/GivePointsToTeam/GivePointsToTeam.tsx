@@ -17,11 +17,7 @@ export default function GivePointsToTeam({
 }) {
   const [processing, setProcessing] = useState(false);
 
-  const {
-    team,
-    isError,
-    isLoading,
-  }: { [x: string]: Team; isError: any; isLoading: any } = useTeam(teamId);
+  const { team, isError, isLoading } = useTeam(teamId);
 
   if (isError) {
     return <GameError title="Problem with the answer" errorDetails={isError} />;

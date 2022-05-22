@@ -6,7 +6,6 @@ import ResetFinaleButton from './ResetFinaleButton';
 import styles from './ManageFinale.module.css';
 import { sortQuestions } from '../../../../lib/helpers';
 import ManageFinaleRound from '../ManageFinaleRound/ManageFinaleRound';
-import { useState } from 'react';
 
 export default function ManageFinale() {
   const { questions, isError, isLoading } = useQuestions();

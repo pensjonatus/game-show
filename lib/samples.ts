@@ -8,7 +8,6 @@ const samples: Sample = {
     questionId: undefined,
     inFinale: false,
     finaleTeamId: undefined,
-    finaleScore: 0,
     finaleRound: Round.ROUND_ONE,
   },
   teams: [

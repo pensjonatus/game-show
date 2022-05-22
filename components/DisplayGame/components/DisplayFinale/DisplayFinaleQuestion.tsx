@@ -5,7 +5,11 @@ import styles from '../DisplayFinale/DisplayFinale.module.css';
 import { useEffect, useState } from 'react';
 import { Round } from '@prisma/client';
 
-export default function DisplayFinaleQuestion({ questionId, round }) {
+export default function DisplayFinaleQuestion({
+  questionId,
+  round,
+  isActiveRound,
+}) {
   const [playerAnswer, setPlayerAnswer] = useState(undefined);
   const [scoreAwarded, setScoreAwarded] = useState(undefined);
   const { question, isError, isLoading } = useQuestion(questionId);
@@ -38,10 +42,10 @@ export default function DisplayFinaleQuestion({ questionId, round }) {
   return (
     <div className={styles.row}>
       <div className={styles.answer}>
-        {playerAnswer ? <span>{playerAnswer}</span> : <Mask width="100%" />}
+        {(playerAnswer && isActiveRound) ? <span>{playerAnswer}</span> : <Mask width="100%" />}
       </div>
       <div className={styles.score}>
-        {scoreAwarded > 0 ? <span>{scoreAwarded}</span> : <Mask width="100%" />}
+        {(scoreAwarded > 0 && isActiveRound) ? <span>{scoreAwarded}</span> : <Mask width="100%" />}
       </div>
     </div>
   );

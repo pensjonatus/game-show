@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { AllQuestions, BackendError, QuestionWithAnswers } from './types';
 import { Game, Team } from '@prisma/client';
+import { type } from 'os';
 
 type FetcherHandlers = {
   isLoading: any;
@@ -50,7 +51,11 @@ export function useTeams(): UseTeamsShape {
   return getData('/api/teams', 'teams');
 }
 
-export function useTeam(teamId: string) {
+type UseTeamShape = FetcherHandlers & {
+  [x: string]: Team;
+};
+
+export function useTeam(teamId: string): UseTeamShape {
   return getData(`/api/teams/${teamId}`, 'team');
 }
 

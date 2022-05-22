@@ -58,7 +58,7 @@ export default function ManageFinaleRound() {
           onChange={() => setRound(Round.ROUND_TWO)}
           checked={game.finaleRound === Round.ROUND_TWO}
         />
-        <span>Round 1</span>
+        <span>Round 2</span>
       </label>
       {roundError && (
         <GameError title="Cannot change round" errorDetails={roundError} />

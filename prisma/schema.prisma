@@ -60,7 +60,6 @@ model Game {
   inFinale        Boolean   @default(false)
   finaleTeam      Team?     @relation(fields: [finaleTeamId], references: [id])
   finaleTeamId    String?
-  finaleScore     Int?      @default(0)
   finaleRound     Round?    @default(value: ROUND_ONE)
   currentQuestion Question? @relation(fields: [questionId], references: [id])
   questionId      String?

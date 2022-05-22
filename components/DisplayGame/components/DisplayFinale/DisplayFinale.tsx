@@ -4,9 +4,11 @@ import GameError from '../../../GameError/GameError';
 import DisplayFinaleQuestion from './DisplayFinaleQuestion';
 import styles from './DisplayFinale.module.css';
 import { Round } from '@prisma/client';
+import DisplayFinaleScore from '../DisplayFinaleScore/DisplayFinaleScore';
 
 export default function DisplayFinale() {
   const { questions, isError, isLoading } = useQuestions();
+  const { game, isError: gameError, isLoading: gameLoading } = useGame();
 
   if (isError) {
     return (
@@ -17,7 +19,11 @@ export default function DisplayFinale() {
     );
   }
 
-  if (isLoading) {
+  if (gameError) {
+    return <GameError title="Cannot load game" errorDetails={gameError} />;
+  }
+
+  if (isLoading || gameLoading) {
     return <div>Loading...</div>;
   }
 
@@ -33,6 +39,7 @@ export default function DisplayFinale() {
               questionId={question.id}
               key={question.id}
               round={Round.ROUND_ONE}
+              isActiveRound={game.finaleRound === Round.ROUND_ONE}
             />
           ))}
         </div>
@@ -42,10 +49,12 @@ export default function DisplayFinale() {
               questionId={question.id}
               key={question.id}
               round={Round.ROUND_TWO}
+              isActiveRound={game.finaleRound === Round.ROUND_TWO}
             />
           ))}
         </div>
       </div>
+      <DisplayFinaleScore teamId={game.finaleTeamId} />
     </div>
   );
 }
