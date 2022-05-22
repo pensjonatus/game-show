@@ -2,7 +2,7 @@ import { Answer, Round } from '@prisma/client';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import commons from '../../../../lib/commons';
-import { useGame, useQuestion } from '../../../../lib/gameHooks';
+import { useAudio, useGame, useQuestion } from '../../../../lib/gameHooks';
 import { postToEndpoint } from '../../../../lib/helpers';
 import GameError from '../../../GameError/GameError';
 import styles from './ManageFinaleAnswer.module.css';
@@ -16,6 +16,7 @@ export default function ManageFinaleAnswer({ questionId }) {
   const [updateError, setUpdateError] = useState(undefined);
   const [processing, setProcessing] = useState(false);
 
+  const [playingWrong, toggleWrong] = useAudio('/resources/wrong.wav');
   const { question, isError, isLoading } = useQuestion(questionId);
   const { game, isError: gameError, isLoading: gameLoading } = useGame();
 
@@ -76,9 +77,20 @@ export default function ManageFinaleAnswer({ questionId }) {
     return <div>Loading...</div>;
   }
 
+  if (!game.finaleTeamId) {
+    return <div>Select a team!</div>;
+  }
+
   async function addPoints() {
     try {
-      if (!processing && points > 0 && !scoreAwarded) {
+      if (!processing && !scoreAwarded) {
+        if (points === 0) {
+          if (!playingWrong) {
+            toggleWrong();
+          }
+          return;
+        }
+
         setProcessing(true);
 
         const scoreUpdate = await postToEndpoint(
@@ -106,7 +118,7 @@ export default function ManageFinaleAnswer({ questionId }) {
           if (!response.ok) {
             const addErr = await response.json();
             setUpdateErrorTitle('Cannot add points');
-            setUpdateError(addErr);
+            setUpdateError({ message: `${JSON.stringify(addErr)}` });
           }
         }
 
@@ -169,9 +181,7 @@ export default function ManageFinaleAnswer({ questionId }) {
         </button>
         <button
           onClick={addPoints}
-          className={clsx(
-            (processing || points === 0 || scoreAwarded) && 'disabledButton'
-          )}
+          className={clsx((processing || scoreAwarded) && 'disabledButton')}
         >
           Give points ({points})
         </button>

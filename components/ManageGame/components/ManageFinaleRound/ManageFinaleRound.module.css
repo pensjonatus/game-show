@@ -1,3 +1,15 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.wrapper label {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
 .disabled {
   background-color: lightgrey;
 }

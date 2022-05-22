@@ -43,7 +43,7 @@ export default function ManageFinaleRound() {
   }
 
   return (
-    <fieldset className={clsx(processing && styles.disabled)}>
+    <fieldset className={clsx(styles.wrapper, processing && styles.disabled)}>
       <label>
         <input
           type="radio"

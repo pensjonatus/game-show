@@ -63,7 +63,7 @@ async function setScoreAwarded(
         )}`,
       });
     } else {
-      res.json(result);
+      res.json({ message: `Error trying to update score: ${result}` });
     }
   } catch (err) {
     res.status(500).json({
