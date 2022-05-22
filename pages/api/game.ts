@@ -1,6 +1,6 @@
 import prisma from '../../lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Game, Question, Round } from '@prisma/client';
+import { Game, Question, QuestionType, Round } from '@prisma/client';
 import commons from '../../lib/commons';
 import { BackendError } from '../../lib/types';
 
@@ -16,7 +16,13 @@ async function startGame(
   }
 
   try {
-    const firstQuestion: Question = await prisma.question.findFirst();
+    const firstQuestion: Question = await prisma.question.findFirst({
+      where: {
+        type: {
+          not: QuestionType.FINALE
+        }
+      }
+    });
     const startedGame = await prisma.game.update({
       where: {
         id: gameState.id,

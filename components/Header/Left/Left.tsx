@@ -17,15 +17,11 @@ export default function Left() {
           <Image src="/logo.png" alt="logo" width="32" height="32" />
         </a>
       </Link>
-      {game.inProgress ? (
-        <Link href="/game">
-          <a target="_blank" className="button">
-            Game
-          </a>
-        </Link>
-      ) : (
-        <button className="disabledButton">No game running</button>
-      )}
+      <Link href="/game">
+        <a target="_blank" className="button">
+          Game
+        </a>
+      </Link>
     </div>
   );
 }
