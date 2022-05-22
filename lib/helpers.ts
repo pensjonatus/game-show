@@ -66,3 +66,13 @@ export function sortAnswers(answers: Answer[], questionType: QuestionType) {
 
   return copyOfAnswers;
 }
+
+export function sortQuestions(questions: QuestionWithAnswers[]) {
+  const copyOfQuestions: QuestionWithAnswers[] = JSON.parse(
+    JSON.stringify(questions)
+  );
+
+  copyOfQuestions.sort((a, b) => (a.id > b.id ? 1 : -1));
+
+  return copyOfQuestions;
+}

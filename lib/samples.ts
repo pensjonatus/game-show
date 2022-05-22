@@ -7,6 +7,8 @@ const samples: Sample = {
     inProgress: false,
     questionId: undefined,
     inFinale: false,
+    finaleTeamId: undefined,
+    finaleScore: 0,
   },
   teams: [
     {

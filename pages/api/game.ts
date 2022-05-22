@@ -37,6 +37,7 @@ async function startGame(
   }
 }
 
+//  reset game and stop it
 async function stopGame(
   gameState: Game,
   res: NextApiResponse<BackendError | Game>
@@ -85,6 +86,7 @@ async function stopGame(
         inProgress: false,
         inFinale: false,
         currentQuestion: undefined,
+        finaleScore: 0,
       },
     });
 
@@ -190,6 +192,36 @@ async function setFinaleTeam(
   }
 }
 
+async function resetFinale(gameId: string, res: NextApiResponse) {
+  try {
+    const allResults = [];
+
+    const resetQuestionsResult = await prisma.question.updateMany({
+      data: {
+        playerAnswer: null,
+        scoreAwarded: 0,
+      },
+    });
+    allResults.push(resetQuestionsResult);
+
+    const resetResult = await prisma.game.update({
+      where: {
+        id: gameId,
+      },
+      data: {
+        finaleScore: 0,
+        finaleTeamId: null,
+      },
+    });
+
+    allResults.push(resetResult);
+
+    res.json(allResults);
+  } catch (err) {
+    res.status(500).json({ message: `Cannot reset game: ${err.message}` });
+  }
+}
+
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse<BackendError | Game>
@@ -216,6 +248,9 @@ export default async function handle(
       case gameCommands.setFinaleTeam:
         const teamId = req.body.value;
         await setFinaleTeam(gameState, teamId, res);
+        break;
+      case gameCommands.resetFinale:
+        await resetFinale(gameState.id, res);
         break;
 
       default:

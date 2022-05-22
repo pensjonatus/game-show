@@ -1,8 +1,10 @@
-import { useQuestions, useTeams } from '../../../../lib/gameHooks';
-import { AllQuestions } from '../../../../lib/types';
+import { useQuestions } from '../../../../lib/gameHooks';
 import GameError from '../../../GameError/GameError';
 import ManageFinaleAnswer from '../ManageFinaleAnswer/ManageFinaleAnswer';
 import ManageFinaleTeam from '../ManageFinaleTeam/ManageFinaleTeam';
+import ResetFinaleButton from './ResetFinaleButton';
+import styles from './ManageFinale.module.css';
+import { sortQuestions } from '../../../../lib/helpers';
 
 export default function ManageFinale() {
   const { questions, isError, isLoading } = useQuestions();
@@ -20,10 +22,15 @@ export default function ManageFinale() {
     return <div>Loading...</div>;
   }
 
+  questions.finale = sortQuestions(questions.finale);
+
   return (
     <div>
-      <h2>Finale!</h2>
-      <ManageFinaleTeam/>
+      <div className={styles.header}>
+        <h2>Finale!</h2>
+        <ResetFinaleButton />
+      </div>
+      <ManageFinaleTeam />
       {questions.finale.map((question) => (
         <ManageFinaleAnswer questionId={question.id} key={question.id} />
       ))}

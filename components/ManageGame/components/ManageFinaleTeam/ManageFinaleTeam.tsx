@@ -54,7 +54,7 @@ export default function ManageFinaleTeam() {
             <input
               type="radio"
               checked={game.finaleTeamId === team.id}
-              onClick={() => updateFinaleTeam(team.id)}
+              onChange={() => updateFinaleTeam(team.id)}
             />
             {team.name}
           </label>

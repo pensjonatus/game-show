@@ -1,4 +1,5 @@
 import { useQuestions } from '../../../../lib/gameHooks';
+import { sortQuestions } from '../../../../lib/helpers';
 import { AllQuestions } from '../../../../lib/types';
 import GameError from '../../../GameError/GameError';
 import DisplayFinaleQuestion from '../DisplayFinaleQuestion/DisplayFinaleQuestion';
@@ -19,6 +20,8 @@ export default function DisplayFinale() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  questions.finale = sortQuestions(questions.finale);
 
   return (
     <div>
