@@ -26,9 +26,9 @@ export default function Home() {
         <h2>Questions</h2>
         <AllQuestions />
       </section>
-      <section className={styles.adminZone}>
-        <DataManager />
-      </section>
+      {/* <section className={styles.adminZone}> */}
+        {/* <DataManager /> */}
+      {/* </section> */}
     </Layout>
   );
 }
