@@ -3,14 +3,13 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { AllQuestions, BackendError, QuestionWithAnswers } from './types';
 import { Game, Team } from '@prisma/client';
-import { type } from 'os';
 
 type FetcherHandlers = {
   isLoading: any;
   isError: BackendError | undefined;
 };
 
-const options: SWRConfiguration = { refreshInterval: 1000 };
+const options: SWRConfiguration = { refreshInterval: 100 };
 const fetcher = async (url) => await axios.get(url).then((res) => res.data);
 
 function getData(endpoint: string, dataFieldName: string) {
