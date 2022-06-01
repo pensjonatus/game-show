@@ -13,7 +13,7 @@ const samples: Sample = {
   teams: [
     {
       id: '0',
-      name: 'Nawigatorzy',
+      name: 'Navigators',
       avatarUrl:
         'https://upload.wikimedia.org/wikipedia/en/a/a3/Max_Pr%C3%BCss_-_Max_Pruss_Zeppelin_Navigator_Hindenburg.jpg',
       score: 0,
@@ -21,7 +21,7 @@ const samples: Sample = {
     },
     {
       id: '1',
-      name: 'Marcepan',
+      name: 'Marzipan',
       avatarUrl:
         'https://images-gmi-pmc.edge-generalmills.com/26983a17-0396-4b63-8caa-2286669e788b.jpg',
       score: 0,
@@ -93,7 +93,7 @@ const samples: Sample = {
         },
         {
           answer: 'Free coffee!!!',
-          points: 17,
+          points: 0,
         },
         {
           answer: 'Helping people',
