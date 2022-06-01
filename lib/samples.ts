@@ -34,24 +34,32 @@ const samples: Sample = {
       type: QuestionType.SINGLE,
       answers: [
         {
-          answer: 'Oxygen',
-          points: 36,
+          answer: 'Oxygen XML',
+          points: 17,
         },
         {
-          answer: 'DITA',
-          points: 31,
+          answer: 'CMS/CCMS',
+          points: 28,
         },
         {
-          answer: 'Markdown',
-          points: 21,
-        },
-        {
-          answer: 'MS Word',
+          answer: 'MadCap Flare',
           points: 14,
         },
         {
-          answer: 'RoboHelp',
-          points: 1,
+          answer: 'Confluence',
+          points: 10,
+        },
+        {
+          answer: 'Markdown editor',
+          points: 14,
+        },
+        {
+          answer: 'Visual Studio Code',
+          points: 10,
+        },
+        {
+          answer: 'MS Word',
+          points: 7,
         },
       ],
     },
@@ -60,24 +68,88 @@ const samples: Sample = {
       type: QuestionType.TRUE_FALSE,
       answers: [
         {
-          answer: 'Free coffee',
+          answer: 'Love writing',
+          points: 38,
+        },
+        {
+          answer: 'Parents forced me',
           points: 0,
         },
         {
-          answer: 'Love writing',
+          answer: 'Money',
+          points: 28,
+        },
+        {
+          answer: 'Job that combines language and technology',
+          points: 14,
+        },
+        {
+          answer: 'Want to travel',
+          points: 0,
+        },
+        {
+          answer: 'Technology is king!',
+          points: 17,
+        },
+        {
+          answer: 'Free coffee!!!',
+          points: 17,
+        },
+        {
+          answer: 'Helping people',
+          points: 3,
+        },
+      ],
+    },
+    {
+      question: 'A programming language',
+      type: QuestionType.SINGLE,
+      answers: [
+        {
+          answer: 'JavaScript',
+          points: 13,
+        },
+        {
+          answer: 'C++',
           points: 11,
         },
         {
-          answer: 'Like desks',
+          answer: 'Python',
+          points: 41,
+        },
+        {
+          answer: 'Java',
+          points: 25,
+        },
+        {
+          answer: 'XML',
+          points: 10,
+        },
+      ],
+    },
+    {
+      question: 'A job title for a person who creates documentation',
+      type: QuestionType.SINGLE,
+      answers: [
+        {
+          answer: 'Technical Writer',
+          points: 55,
+        },
+        {
+          answer: 'Content Designer',
           points: 12,
         },
         {
-          answer: 'Thomas Pynchon fan',
-          points: 0,
+          answer: 'Author',
+          points: 12,
         },
         {
-          answer: 'Want to be a programmer',
-          points: 1,
+          answer: 'Information Developer',
+          points: 12,
+        },
+        {
+          answer: 'Documentation Specialist',
+          points: 9,
         },
       ],
     },
@@ -86,69 +158,96 @@ const samples: Sample = {
       type: QuestionType.DOUBLE,
       answers: [
         {
-          answer: 'Dub step',
-          points: 30,
+          answer: 'Metal',
+          points: 17,
         },
         {
-          answer: 'Jazz',
-          points: 1,
+          answer: 'Classical',
+          points: 14,
         },
-        { answer: 'Lo-fi beats', points: 26 },
+        {
+          answer: 'Rock',
+          points: 28,
+        },
+        {
+          answer: 'Rap',
+          points: 7,
+        },
+        {
+          answer: 'Electronic',
+          points: 34,
+        },
       ],
     },
     {
       question: 'A popular word in technical documentation',
-      type: QuestionType.TRIPLE,
+      type: QuestionType.TRUE_FALSE,
       answers: [
         {
-          answer: 'Upgrade',
-          points: 30,
+          answer: 'Content',
+          points: 40,
         },
         {
-          answer: 'Install',
-          points: 13,
+          answer: 'Review',
+          points: 20,
         },
         {
-          answer: 'Verify',
+          answer: 'Delta',
           points: 0,
+        },
+        {
+          answer: 'Misconfigured',
+          points: 0,
+        },
+        {
+          answer: 'Select',
+          points: 60,
+        },
+        {
+          answer: 'Click',
+          points: 80,
+        },
+        {
+          answer: 'Robust',
+          points: 0,
+        },
+        {
+          answer: 'Giant',
+          points: 0,
+        },
+        {
+          answer: 'Guide',
+          points: 40,
         },
       ],
     },
     {
       question: 'A documentation output format',
-      type: QuestionType.TRUE_FALSE,
+      type: QuestionType.TRIPLE,
       answers: [
         {
-          answer: 'PDF',
-          points: 98,
+          answer: 'HTML',
+          points: 17,
         },
         {
-          answer: 'CHM',
-          points: 32,
+          answer: 'PDF',
+          points: 14,
         },
         {
           answer: 'Markdown',
-          points: 0,
-        },
-        {
-          answer: 'HTML',
-          points: 15,
-        },
-        {
-          answer: 'DITA',
-          points: 0,
-        },
-        {
-          answer: 'troff',
-          points: 0,
+          points: 28,
         },
         {
           answer: 'XML',
-          points: 0,
+          points: 7,
         },
         {
-          answer: 'webhelp',
-          points: 3,
+          answer: 'HTML',
+          points: 34,
+        },
+        {
+          answer: 'DOCX',
+          points: 1,
         },
       ],
     },
@@ -156,85 +255,176 @@ const samples: Sample = {
       question: 'A common language error in documentation',
       type: QuestionType.TRUE_FALSE,
       answers: [
-        { answer: 'Oxford comma', points: 0 },
-        { answer: 'Hanging infinitive', points: 0 },
-        { answer: 'Split infinitive', points: 14 },
-        { answer: 'Passive voice', points: 23 },
-        { answer: 'Contractions', points: 7 },
-        { answer: 'Lowercase product name', points: 0 },
-        { answer: 'No verb', points: 0 },
-        { answer: 'Future tense', points: 27 },
-        { answer: 'Run-on sentence', points: 0 },
+        {
+          answer: 'Incorrect/missing article',
+          points: 25,
+        },
+        {
+          answer: 'Incorrect spelling',
+          points: 18,
+        },
+        {
+          answer: "Captain Kirk's infinitive",
+          points: 0,
+        },
+        {
+          answer: 'No serial comma',
+          points: 18,
+        },
+        {
+          answer: 'Oxford comma',
+          points: 0,
+        },
+        {
+          answer: 'Typo',
+          points: 27,
+        },
+        {
+          answer: 'Puns',
+          points: 0,
+        },
+        {
+          answer: 'Run-on sentence',
+          points: 0,
+        },
+        {
+          answer: 'Passive voice',
+          points: 12,
+        },
       ],
     },
     {
       question: 'An obstacle for delivering documentation on time',
       type: QuestionType.FINALE,
       answers: [
-        { answer: "SMEs don't respond", points: 30 },
-        { answer: 'Last-minute changes', points: 24 },
-        { answer: 'Too many changes', points: 19 },
-        { answer: 'Started too late', points: 7 },
+        {
+          answer: 'Too much work',
+          points: 23,
+        },
+        {
+          answer: 'No product',
+          points: 14,
+        },
+        {
+          answer: 'Scope change',
+          points: 15,
+        },
+        {
+          answer: 'SMEs',
+          points: 31,
+        },
+        {
+          answer: 'CMS crash',
+          points: 12,
+        },
+        {
+          answer: 'Project manager ',
+          points: 5,
+        },
       ],
     },
     {
       question: 'A style rule for writing documentation',
       type: QuestionType.FINALE,
       answers: [
-        { answer: 'No future', points: 26 },
-        { answer: 'No passive voice', points: 25 },
-        { answer: 'Short sentences', points: 22 },
-        { answer: 'Use "you"', points: 10 },
+        {
+          answer: 'Use serial comma',
+          points: 21,
+        },
+        {
+          answer: 'Minimalism',
+          points: 12,
+        },
+        {
+          answer: 'Simplicity',
+          points: 18,
+        },
+        {
+          answer: 'Be consistent',
+          points: 16,
+        },
+        {
+          answer: 'Be concise',
+          points: 33,
+        },
       ],
     },
     {
       question: 'A DITA tag',
       type: QuestionType.FINALE,
       answers: [
-        { answer: 'p', points: 30 },
-        { answer: 'parmname', points: 31 },
-        { answer: 'section', points: 14 },
-        { answer: 'example', points: 5 },
+        {
+          answer: 'topic',
+          points: 28,
+        },
+        {
+          answer: 'conref',
+          points: 22,
+        },
+        {
+          answer: 'section',
+          points: 21,
+        },
+        {
+          answer: 'p',
+          points: 18,
+        },
+        {
+          answer: 'dita',
+          points: 11,
+        },
       ],
     },
     {
       question: 'A tool for generating static sites',
       type: QuestionType.FINALE,
       answers: [
-        { answer: 'Docusaurus', points: 99 },
-        { answer: 'Saurudocus', points: 1 },
-        { answer: 'Figmenstein', points: 2 },
-        { answer: 'Blobobo', points: 3 },
+        {
+          answer: 'Jekyll',
+          points: 30,
+        },
+        {
+          answer: 'WordPress',
+          points: 18,
+        },
+        {
+          answer: 'Docusaurus',
+          points: 31,
+        },
+        {
+          answer: 'Hugo',
+          points: 16,
+        },
+        {
+          answer: 'Your CCSM',
+          points: 5,
+        },
       ],
     },
     {
       question: 'A punctuation mark in English',
       type: QuestionType.FINALE,
       answers: [
-        { answer: 'full stop', points: 31 },
-        { answer: 'comma', points: 28 },
-        { answer: 'ampersand', points: 21 },
-        { answer: 'semi-colon', points: 18 },
-      ],
-    },
-    {
-      question: 'A programming language',
-      type: QuestionType.FINALE,
-      answers: [
-        { answer: 'Python', points: 55 },
-        { answer: 'JavaScript', points: 10 },
-        { answer: 'C++', points: 5 },
-        { answer: 'Java', points: 7 },
-      ],
-    },
-    {
-      question: 'A job title for a person who creates documentation',
-      type: QuestionType.FINALE,
-      answers: [
-        { answer: 'Technical writer', points: 30 },
-        { answer: 'Technical author', points: 24 },
-        { answer: 'Content creator', points: 23 },
-        { answer: 'Documentation engineer', points: 21 },
+        {
+          answer: 'Dash',
+          points: 24,
+        },
+        {
+          answer: 'Comma',
+          points: 28,
+        },
+        {
+          answer: 'Full stop',
+          points: 22,
+        },
+        {
+          answer: 'Semicolon',
+          points: 10,
+        },
+        {
+          answer: 'Question mark',
+          points: 16,
+        },
       ],
     },
   ],
