@@ -1,6 +1,17 @@
-# Fullstack Authentication Example with Next.js and NextAuth.js
+# Game show panel in Next.js with SWR
 
-This is the starter project for the fullstack tutorial with Next.js and Prisma.
-You can find the final version of this project in the
-[`final`](https://github.com/prisma/blogr-nextjs-prisma/tree/final) branch of
-this repo.
+Development:
+
+```
+yarn dev
+```
+
+## Setup
+
+You need a Postgres database. Add a `.env` file to
+the root of your project and specif the connection
+string inside:
+
+```
+DATABASE_URL="postgresql://postgres:bla-bla-bla@somethnig.database.com:[PORT]/postgres"
+```
